@@ -1,0 +1,22 @@
+{
+  // The kernel's strictness settings rather than a copy of them: two lists of
+  // compiler options drift, and the day they disagree the game is being held to a
+  // weaker standard than the engine it runs inside.
+  "extends": "../../kernel-2d/tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
+    // The one place this folder says where the kernel sits.
+    //
+    // The code itself names a package (`kernel-2d/runtime`) and stays portable; a
+    // typechecker cannot work from a package name alone, so the location is
+    // written down exactly once, here. If this folder moves, this line changes and
+    // nothing under `src/` does.
+    "paths": {
+      "kernel-2d/runtime": ["../../kernel-2d/runtime/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

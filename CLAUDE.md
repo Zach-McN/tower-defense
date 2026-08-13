@@ -39,17 +39,39 @@ treated as human-authored and is never modified or deleted**. Ask instead.
 
 Whether a generated piece ships or gets replaced is the human's call, made per piece.
 
-## `src/` does not run yet
+## `src/` runs
 
-The folder exists; nothing loads it. The kernel's `runLevel` takes its systems as an
-argument and `BUILT_IN_SYSTEMS` currently holds exactly one scaffolding entry (`spin`), and
-the machinery for a game folder to supply its own systems has not been built. It is parked
-deliberately in `genre-spinup`'s unbuilt list with three open questions — how a game's
-TypeScript compiles into both the editor and an export, how a level says which systems it
-wants, and what happens when that code changes while the editor is open.
+`src/systems/index.ts` exports an ordered list, and **that list is the whole of what runs**.
+The editor's Play button and an exported folder both compile it in, from these files, through
+one plugin (`kernel-2d/scripts/game-code.ts`) — there is no second copy and no second build
+path. The engine runs nothing this list does not name; there is no fallback and no per-level
+system list.
 
-**That is the next session's work, and it is a decision rather than a guess.** Until it
-lands, do not write systems here expecting them to run.
+Code here names the kernel by a package, never by a path:
+
+```ts
+import type { Entity, System } from 'kernel-2d/runtime'
+```
+
+`tsconfig.json` is the one file in this folder that says where the kernel actually sits. If
+this folder moves, that line changes and nothing under `src/` does.
+
+**Typecheck it** — nothing else does, since the editor and the export only transpile:
+
+```bash
+npx tsc --noEmit -p ../games/tower-defense/tsconfig.json
+```
+
+run from `kernel-2d`, which is where TypeScript is installed. It belongs in the definition of
+done for any session that touches `src/`.
+
+**Components are this game's to invent.** The level format carries components it has never
+heard of, so a system can read data the engine knows nothing about — `march` reads `speed`,
+and the kernel gained nothing to make that work. Adding a component here is not a kernel
+change and must not become one.
+
+**Editing a system does not need a restart.** Save, press Stop and Play, and the new
+behaviour runs; the open level, the selection and the camera all survive.
 
 ## This game's own skills
 
