@@ -1,0 +1,1570 @@
+{
+  "format": "kernel2d.scene",
+  "version": 1,
+  "entities": [
+    {
+      "id": "5362fd5561453349",
+      "name": "Ground",
+      "transform": {
+        "x": 160,
+        "y": 96,
+        "rotation": 0,
+        "scaleX": 20,
+        "scaleY": 12
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "d62813ec02ca1b7f",
+            "path": "prefabs/ground.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "afccde6f92fd62f5",
+      "name": "Spawn",
+      "transform": {
+        "x": 8,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "d08ad497c1ce6822",
+            "path": "prefabs/road-spawn.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "b133a51d67a4edbd",
+      "name": "Road 2",
+      "transform": {
+        "x": 24,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "b4e866b49da2debc",
+      "name": "Road 3",
+      "transform": {
+        "x": 40,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "69eb58938969a77c",
+      "name": "Road 4",
+      "transform": {
+        "x": 56,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "f0422557377b89a5",
+      "name": "Road 5",
+      "transform": {
+        "x": 72,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "c5e86914d0d7dc65",
+      "name": "Road 6",
+      "transform": {
+        "x": 88,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "4680383e1a8c402c",
+      "name": "Road 7",
+      "transform": {
+        "x": 104,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "c9cd82e487ed5ede",
+      "name": "Road 8",
+      "transform": {
+        "x": 120,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "bb940e6d7e110246",
+      "name": "Road 9",
+      "transform": {
+        "x": 136,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "f2e9e5b7f3e43731",
+      "name": "Road 10",
+      "transform": {
+        "x": 152,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "59f849d465b59e2d",
+      "name": "Road 11",
+      "transform": {
+        "x": 168,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "acdd24b8352c0be5",
+      "name": "Road 12",
+      "transform": {
+        "x": 184,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "b2bc138d7ed233ca",
+      "name": "Road 13",
+      "transform": {
+        "x": 200,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "758b1e09969ba9be",
+      "name": "Road 14",
+      "transform": {
+        "x": 216,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "5366c33f725f9349",
+      "name": "Road 15",
+      "transform": {
+        "x": 216,
+        "y": 136,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "e58b95bdb32f2193",
+      "name": "Road 16",
+      "transform": {
+        "x": 216,
+        "y": 120,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "014221d1d1bb3529",
+      "name": "Road 17",
+      "transform": {
+        "x": 216,
+        "y": 104,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "7b858e700d6c3442",
+      "name": "Road 18",
+      "transform": {
+        "x": 216,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "f36a1e4b07f1b29b",
+      "name": "Road 19",
+      "transform": {
+        "x": 200,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "cee7354af0acdee5",
+      "name": "Road 20",
+      "transform": {
+        "x": 184,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "fb67da3131500d4d",
+      "name": "Road 21",
+      "transform": {
+        "x": 168,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "c2d5af980e9676b5",
+      "name": "Road 22",
+      "transform": {
+        "x": 152,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "dd5f5f992506ee65",
+      "name": "Road 23",
+      "transform": {
+        "x": 136,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "0f012ad362391294",
+      "name": "Road 24",
+      "transform": {
+        "x": 120,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "311339cfc7cedf1c",
+      "name": "Road 25",
+      "transform": {
+        "x": 104,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "f77bb1798474cebf",
+      "name": "Road 26",
+      "transform": {
+        "x": 88,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "6d679bf50ae652bd",
+      "name": "Road 27",
+      "transform": {
+        "x": 72,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "ab987510fefc5ea0",
+      "name": "Road 28",
+      "transform": {
+        "x": 72,
+        "y": 72,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "8eb758e5a7e302b2",
+      "name": "Road 29",
+      "transform": {
+        "x": 72,
+        "y": 56,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "ff02e078d911fd36",
+      "name": "Road 30",
+      "transform": {
+        "x": 72,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "3ef16b753821264b",
+      "name": "Road 31",
+      "transform": {
+        "x": 72,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "374582f81a4aee7c",
+      "name": "Road 32",
+      "transform": {
+        "x": 88,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "fb23b8277f454d24",
+      "name": "Road 33",
+      "transform": {
+        "x": 104,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "670f7aaf848f544b",
+      "name": "Road 34",
+      "transform": {
+        "x": 120,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "0ac03329325917d8",
+      "name": "Road 35",
+      "transform": {
+        "x": 136,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "8a6a2369ae792086",
+      "name": "Road 36",
+      "transform": {
+        "x": 152,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "a88f1f3b322d9ea0",
+      "name": "Road 37",
+      "transform": {
+        "x": 168,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "5693425b3e961ed1",
+      "name": "Road 38",
+      "transform": {
+        "x": 184,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "6e1210a2b577f97c",
+      "name": "Road 39",
+      "transform": {
+        "x": 200,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "35b410074dbb6758",
+      "name": "Road 40",
+      "transform": {
+        "x": 216,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "fb8cbd52afcb01bb",
+      "name": "Road 41",
+      "transform": {
+        "x": 232,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "d040c39aeed29eed",
+      "name": "Road 42",
+      "transform": {
+        "x": 248,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "a83cc8f418d7aae5",
+      "name": "Road 43",
+      "transform": {
+        "x": 264,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "9a519b00441c2a43",
+      "name": "Road 44",
+      "transform": {
+        "x": 280,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "c5ca54103c640884",
+      "name": "Road 45",
+      "transform": {
+        "x": 296,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "4389a08e112124dd",
+            "path": "prefabs/road-tile.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "edb52a75805e3de5",
+      "name": "Goal",
+      "transform": {
+        "x": 312,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "e9ec07f1bdc6493e",
+            "path": "prefabs/road-goal.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "7e7fa2d381a80b08",
+      "name": "Pad 1",
+      "transform": {
+        "x": 40,
+        "y": 136,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "57c1a741f07342da",
+      "name": "Pad 2",
+      "transform": {
+        "x": 104,
+        "y": 120,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "65aa743d1d72f1d3",
+      "name": "Pad 3",
+      "transform": {
+        "x": 168,
+        "y": 120,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "7cdbcd5491f92c04",
+      "name": "Pad 4",
+      "transform": {
+        "x": 200,
+        "y": 104,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "e67bae418fec29ac",
+      "name": "Pad 5",
+      "transform": {
+        "x": 88,
+        "y": 56,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "bc3d1afae9a15059",
+      "name": "Pad 6",
+      "transform": {
+        "x": 152,
+        "y": 56,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "8c608810d8a0498c",
+      "name": "Pad 7",
+      "transform": {
+        "x": 200,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "7eb8a95587919f66",
+      "name": "Pad 8",
+      "transform": {
+        "x": 264,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "e6b85bb037db4161",
+      "name": "Archer ware",
+      "transform": {
+        "x": -24,
+        "y": 184,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2803339dcb617c4e",
+            "path": "prefabs/tower-archer.json"
+          }
+        },
+        "ware": {}
+      }
+    },
+    {
+      "id": "737d98c991f3a9cf",
+      "name": "Mage ware",
+      "transform": {
+        "x": -48,
+        "y": 184,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2e1ca31313247666",
+            "path": "prefabs/tower-mage.json"
+          }
+        },
+        "ware": {}
+      }
+    },
+    {
+      "id": "2bb0e817faf23def",
+      "name": "Frost ware",
+      "transform": {
+        "x": -72,
+        "y": 184,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ddad785541b8c4eb",
+            "path": "prefabs/tower-frost.json"
+          }
+        },
+        "ware": {}
+      }
+    },
+    {
+      "id": "2d781413a47d4879",
+      "name": "Ballista ware",
+      "transform": {
+        "x": -96,
+        "y": 184,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2f8cbc41f5b50773",
+            "path": "prefabs/tower-ballista.json"
+          }
+        },
+        "ware": {}
+      }
+    },
+    {
+      "id": "117ea4fb44c5dd4b",
+      "name": "Purse 1",
+      "transform": {
+        "x": 24,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "74b01ef7fc62dfc0",
+            "path": "prefabs/coin.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "132676525a714ffa",
+      "name": "Purse 2",
+      "transform": {
+        "x": 40,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "74b01ef7fc62dfc0",
+            "path": "prefabs/coin.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "05c2055876f0071c",
+      "name": "Purse 3",
+      "transform": {
+        "x": 56,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "74b01ef7fc62dfc0",
+            "path": "prefabs/coin.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "5bb36b803da661ee",
+      "name": "Purse 4",
+      "transform": {
+        "x": 72,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "74b01ef7fc62dfc0",
+            "path": "prefabs/coin.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "c8009430e738cae1",
+      "name": "Life 1",
+      "transform": {
+        "x": 264,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ab457322d109b124",
+            "path": "prefabs/life.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "2518e6493ea78eb6",
+      "name": "Life 2",
+      "transform": {
+        "x": 280,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ab457322d109b124",
+            "path": "prefabs/life.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "4f5bd2ad88779c6d",
+      "name": "Life 3",
+      "transform": {
+        "x": 296,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ab457322d109b124",
+            "path": "prefabs/life.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "338c33c56a96e708",
+      "name": "Runner 1",
+      "transform": {
+        "x": -8,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "446dd18bea1eea67",
+      "name": "Runner 2",
+      "transform": {
+        "x": -24,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "45759d02ab0ba4a5",
+      "name": "Runner 3",
+      "transform": {
+        "x": -40,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "f6ef2b981a0a95c6",
+      "name": "Runner 4",
+      "transform": {
+        "x": -56,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "2f6a94b0a71d3418",
+      "name": "Wave break 1",
+      "transform": {
+        "x": -72,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "5e0badee39eba7a7",
+            "path": "prefabs/wave-break.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "93c2d4761e6a7c21",
+      "name": "Brute 1",
+      "transform": {
+        "x": -88,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "6041c2b0db33ea43",
+            "path": "prefabs/monster-brute.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "ebc1394ea2fc943c",
+      "name": "Runner 5",
+      "transform": {
+        "x": -104,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "01b27a094174fa50",
+      "name": "Runner 6",
+      "transform": {
+        "x": -120,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "34022e58ea69a620",
+      "name": "Brute 2",
+      "transform": {
+        "x": -136,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "6041c2b0db33ea43",
+            "path": "prefabs/monster-brute.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "6abb0b7881719a68",
+      "name": "Wave break 2",
+      "transform": {
+        "x": -152,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "5e0badee39eba7a7",
+            "path": "prefabs/wave-break.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "95fcae9c4626ab35",
+      "name": "Brute 3",
+      "transform": {
+        "x": -168,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "6041c2b0db33ea43",
+            "path": "prefabs/monster-brute.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "69dba5e5e1db3056",
+      "name": "Runner 7",
+      "transform": {
+        "x": -180,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "4b6e07171ffa3aa3",
+      "name": "Runner 8",
+      "transform": {
+        "x": -192,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "ad2deb8b4adbc22b",
+      "name": "Brute 4",
+      "transform": {
+        "x": -208,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "6041c2b0db33ea43",
+            "path": "prefabs/monster-brute.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "180bc2fd52f0cfb4",
+      "name": "Runner 9",
+      "transform": {
+        "x": -220,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "3d62f99376c6a895",
+      "name": "Runner 10",
+      "transform": {
+        "x": -232,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    }
+  ],
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}
