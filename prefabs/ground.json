@@ -42,6 +42,40 @@
         }
       }
     },
+    "range": {
+      "ring": {
+        "texture": {
+          "id": "aa1f00f954e3a579",
+          "path": "assets/textures/tokens/ring.png"
+        }
+      },
+      "pale": {
+        "texture": {
+          "id": "db0d3951093de44e",
+          "path": "assets/textures/tokens/ring-pale.png"
+        }
+      }
+    },
+    "help": {
+      "legend": {
+        "texture": {
+          "id": "33d5f33d3f797b1b",
+          "path": "assets/textures/tokens/legend.png"
+        }
+      }
+    },
+    "digits": {
+      "0": { "texture": { "id": "2f57839c880cda21", "path": "assets/textures/tokens/digit-0.png" } },
+      "1": { "texture": { "id": "f6f1e3a42f7a04d0", "path": "assets/textures/tokens/digit-1.png" } },
+      "2": { "texture": { "id": "a46654573a7d355b", "path": "assets/textures/tokens/digit-2.png" } },
+      "3": { "texture": { "id": "f53803430d98147b", "path": "assets/textures/tokens/digit-3.png" } },
+      "4": { "texture": { "id": "70e4644e166fe80d", "path": "assets/textures/tokens/digit-4.png" } },
+      "5": { "texture": { "id": "79e293d22d139086", "path": "assets/textures/tokens/digit-5.png" } },
+      "6": { "texture": { "id": "0b537c5fbfb919d4", "path": "assets/textures/tokens/digit-6.png" } },
+      "7": { "texture": { "id": "f839becd412590ee", "path": "assets/textures/tokens/digit-7.png" } },
+      "8": { "texture": { "id": "4248eb58a857aa38", "path": "assets/textures/tokens/digit-8.png" } },
+      "9": { "texture": { "id": "b228b76e0463c742", "path": "assets/textures/tokens/digit-9.png" } }
+    },
     "tempo": {
       "paused": {
         "texture": {

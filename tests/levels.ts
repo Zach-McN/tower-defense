@@ -184,7 +184,28 @@ export function ground(tileSize: number = TILE): Entity {
     coin: { texture: { id: 'coin-texture', path: 'assets/textures/tokens/coin.png' } },
     star: { texture: { id: 'star-texture', path: 'assets/textures/tokens/star.png' } },
   }
+  backdrop.components['range'] = {
+    ring: { texture: { id: 'ring-texture', path: 'assets/textures/tokens/ring.png' } },
+    pale: { texture: { id: 'ring-pale-texture', path: 'assets/textures/tokens/ring-pale.png' } },
+  }
+  backdrop.components['help'] = {
+    legend: { texture: { id: 'legend-texture', path: 'assets/textures/tokens/legend.png' } },
+  }
+  backdrop.components['digits'] = Object.fromEntries(
+    [...Array(10).keys()].map((digit) => [
+      String(digit),
+      { texture: { id: `digit-${String(digit)}-texture`, path: `assets/textures/tokens/digit-${String(digit)}.png` } },
+    ]),
+  )
   return backdrop
+}
+
+/** A scenery tile — looks nice, cannot be built on, is not walked on. */
+export function scenery(at: { x: number; y: number }, name = 'Tree'): Entity {
+  return entity(name, at.x, at.y, {
+    sprite: { texture: { id: 'tree-texture', path: 'assets/textures/tiles/tree.png' } },
+    tile: { kind: 'scenery' },
+  })
 }
 
 /**

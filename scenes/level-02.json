@@ -1563,6 +1563,46 @@
           }
         }
       }
+    },
+    {
+      "id": "7a8192a3b4c5d6e7",
+      "name": "Tree 1",
+      "transform": { "x": 24, "y": 56, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "c97f9b523e676a25", "path": "prefabs/scenery-tree.json" } }
+      }
+    },
+    {
+      "id": "8192a3b4c5d6e7f8",
+      "name": "Rock 1",
+      "transform": { "x": 24, "y": 104, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "c08b9f95f5a566b4", "path": "prefabs/scenery-rock.json" } }
+      }
+    },
+    {
+      "id": "92a3b4c5d6e7f819",
+      "name": "Tree 2",
+      "transform": { "x": 184, "y": 56, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "c97f9b523e676a25", "path": "prefabs/scenery-tree.json" } }
+      }
+    },
+    {
+      "id": "a3b4c5d6e7f8192a",
+      "name": "Rock 2",
+      "transform": { "x": 296, "y": 120, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "c08b9f95f5a566b4", "path": "prefabs/scenery-rock.json" } }
+      }
+    },
+    {
+      "id": "b4c5d6e7f8192a3b",
+      "name": "Tree 3",
+      "transform": { "x": 120, "y": 184, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "c97f9b523e676a25", "path": "prefabs/scenery-tree.json" } }
+      }
     }
   ],
   "generatedBy": "claude-fable-5",

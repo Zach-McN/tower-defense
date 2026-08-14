@@ -7,8 +7,8 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **a level select with remembered completion, two levels, four
-towers, upgrade tiers, and selling** (2026-08-14).
+Last true as of: **scenery, and the paused planning view — range rings, prices,
+and the keys on screen** (2026-08-14).
 
 ---
 
@@ -69,6 +69,15 @@ mid-map, everything freezes where it stands, and P again resumes. Press **F** to
 at triple speed — chevrons appear, and F again returns to normal. Pause wins if both
 are on. You can call a wave while paused; it stands ready at the spawn until time
 moves again, which is a fine way to take a breath and look at the board.
+
+**Pausing is also the planning view.** While time stands still the board explains
+itself: a gold ring around every tower you own showing exactly what it covers
+(rings grow when you upgrade), a paler ring on every open pad showing what the
+*chosen* ware would cover from there, gold numbers over each tower saying what its
+next tier costs and over the chosen ware saying its price, and a panel listing
+every key the game answers to. Unpause and it all vanishes — the running board
+stays clean. Everything on the panel and every number is readable before you spend
+a coin, which is the point.
 
 **Click a grey pad to buy a tower there.** The flagstone pads are the buildable
 tiles, and clicking a vacant one builds whatever the golden arrow points at, paid
@@ -315,6 +324,13 @@ rungs — and every coin remembers its worth, change and refunds included.
 bends for value, beside straights for coverage. The pads are the whole of the
 building rules: no pad, no tower, and one tower per pad. Level 1 has six.
 
+**Scenery is the third tile kind, and it is pure decoration.** Place
+**`prefabs/scenery-tree.json`** and **`prefabs/scenery-rock.json`** wherever the
+grass looks empty: monsters never walk them, towers can never be built on them,
+and nothing about play changes. Both levels have a scattering. Add more kinds by
+copying a prefab and swapping its art — anything carrying
+`tile: { kind: "scenery" }` is scenery.
+
 **The starting purse is coins you place.** Click **`prefabs/coin.json`** and put
 down ten-gold coins somewhere tidy — level 1 stacks three in the top-left corner,
 thirty gold, exactly one archer post. Everything the player can spend is visible on
@@ -414,16 +430,11 @@ is the checklist:
 
 ## What this game cannot do yet
 
-- **A Call Wave button on screen.** The spacebar is the button, P and F are the
-  speed controls, X arms a sale, a click is the trowel. Nothing on the screen
-  lists the keys, counts the waves, or shows how many are left — the glyphs that
-  appear mid-map are the only report.
-- **The scenery tile kind.** The design has three kinds of tile; `path` and
-  `buildable` exist, decorative scenery does not.
-- **See a tower's range before Play.** Nothing draws the circle; three tiles from
-  an archer post, five and a bit from a ballista, counted by eye.
-- **See a tier's numbers before buying.** The stars say how high a tower stands;
-  nothing on screen says what the next rung costs or raises. The prefab file does.
+- **A wave counter.** The paused panel lists the keys, but nothing counts the
+  waves or shows how many are left — the queue you drew is the only picture of
+  what is coming, and it is off-screen once the level starts.
+- **See what a tier raises.** The paused view prices the next rung; what the gold
+  buys — more damage, more reach — is still only written in the prefab file.
 - **Forget a completed level.** The checks on the level select persist in the
   browser; nothing in the editor clears them. (Clearing the browser's site data
   does.)

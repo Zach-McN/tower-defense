@@ -441,6 +441,37 @@ The export ships what doors reach (`sceneRefsOf`, the `scene`-key mirror of
 the texture rule) — so `project.json` starting on the select ships both
 levels. _[earned 2026-08-14]_
 
+### T17: Pause is the planning view — the HUD is entities that exist only while time stands still
+
+The spec's loop opens with *"Look at the map"* and promises *"no time
+pressure in the building phase"*; `hud.ts` makes pause that phase made
+visible. While `tempoOf` is 0 (and the level is undecided), the board wears:
+a range ring per owned tower (effective reach — rings grow with tiers), a
+paler ring on every vacant pad sized to the *chosen* ware, gold digits over
+each tower pricing its next rung and over the chosen ware pricing a build,
+and a key-legend panel. Unpause and all of it is removed.
+
+What holds it together is that **nothing here is a UI layer** — the seventh
+straight time that instinct lost (`genre-spinup`'s tally):
+
+- A ring is one texture scaled: drawn radius = range ÷ the ring art's own
+  radius (22px), so one PNG serves every range including upgraded ones.
+- A price is digits, and digits are ten tiny textures the Ground names under
+  `digits` — composed side by side per price, because the art cannot know
+  the number in advance and the number cannot ship as text.
+- The legend is one authored panel (`help.legend`), replaceable art like
+  every glyph.
+- Rebuild-on-signature: the overlay is recomputed each step but respawned
+  only when its JSON differs, so a paused board is not sixty splices a
+  second.
+
+`build.ts` exports `chosenOf` and `occupied` for this — the overlay asks the
+spending system what a click would do rather than re-deriving it. Scenery
+(`tile: { kind: "scenery" }`, the spec's third tile kind) landed the same
+day as pure content: route walks only `path`, build only `buildable`, so a
+tree is inert by construction and two prefabs were the whole feature.
+_[earned 2026-08-14]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -529,6 +560,8 @@ _[earned 2026-08-13]_
   reader (T15).
 - `src/systems/portal.ts` — the `portal` component, click-to-travel through
   the kernel's door, and the completion checks read from the story (T16).
+- `src/systems/hud.ts` — the paused planning overlay: rings, prices, the
+  legend, and the `range`/`help`/`digits` art bundles it reads (T17).
 - `src/systems/leak.ts` — the `life` component, what counts as arriving, and
   which heart a leak takes (T11).
 - `src/systems/verdict.ts` — the `outcome`, `verdict` and `home` components,
@@ -553,15 +586,18 @@ _[earned 2026-08-13]_
   level (T16).
 - `prefabs/coin.json` — the placeable ten-gold coin: how a level draws its
   starting purse (T13).
-- `prefabs/tile-buildable.json` — the third tile kind, where building happens
-  (T13).
+- `prefabs/tile-buildable.json` — the buildable tile kind, where building
+  happens (T13).
+- `prefabs/scenery-tree.json`, `prefabs/scenery-rock.json` — the scenery tile
+  kind: looks nice, cannot be built on, is not walked on (T17).
 - `prefabs/wave-break.json` — the banner that splits the drawn queue into waves
   (T10).
 - `prefabs/life.json` — a heart: one life, counted by placement (T11).
 - `prefabs/ground.json` — the backdrop, the grid (TG3), the way `home` (T16),
-  and the board-centre glyph art: `outcome` for the verdict banner (T11),
-  `tempo` for the pause and fast-forward signs (T12), `wares` for the chosen
-  arrow, the selling sign, the refund coin's face and the tier star (T14, T15).
+  and the board's glyph art: `outcome` for the verdict banner (T11), `tempo`
+  for the pause and fast-forward signs (T12), `wares` for the chosen arrow,
+  the selling sign, the refund coin's face and the tier star (T14, T15), and
+  the planning overlay's `range`, `help` and `digits` bundles (T17).
 - `prefabs/road-tile.json`, `prefabs/road-spawn.json`, `prefabs/road-goal.json` —
   the three kinds of road tile, and therefore the two ends (T7). All three carry
   `tile: { kind: "path" }`; the two ends add an empty `spawn` or `goal`.

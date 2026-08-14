@@ -134,6 +134,24 @@ let founded = 0
 /** Arms a sell; the next click resolves it, one way or the other. */
 const SELL_KEY = 'KeyX'
 
+/**
+ * The ware the keys have picked this run, for anything that shows it — the
+ * planning overlay sizes its pad rings by this (`hud.ts`). Answers what a
+ * click right now would build, including the default before any key has been
+ * pressed.
+ */
+export function chosenOf(entities: readonly Entity[]): Entity | null {
+  const wares = catalogueOf(entities)
+  const state = choices.get(entities)
+  const index = state === undefined || state.index >= wares.length ? 0 : state.index
+  return wares[index] ?? null
+}
+
+/** Whether this pad has a building on it. Exported for the overlay's pad rings. */
+export function occupied(entities: readonly Entity[], pad: Entity): boolean {
+  return isOccupied(entities, pad)
+}
+
 /** A building: anything that fights from a tile — it shoots, or it chills. */
 function isBuilding(entity: Entity): boolean {
   return towerOf(entity) !== null || slowOf(entity) !== null

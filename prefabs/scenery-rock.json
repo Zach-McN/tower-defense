@@ -1,0 +1,19 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "c08b9f95f5a566b4",
+  "name": "Rock",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "b19f6cf343a9b7df",
+        "path": "assets/textures/tiles/rock.png"
+      }
+    },
+    "tile": {
+      "kind": "scenery"
+    }
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}
