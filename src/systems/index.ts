@@ -3,6 +3,7 @@ import type { System } from 'kernel-2d/runtime'
 import { buildSystem } from './build'
 import { leakSystem } from './leak'
 import { marchSystem } from './march'
+import { portalSystem } from './portal'
 import { shootSystem } from './shoot'
 import { tempoSystem } from './tempo'
 import { verdictSystem } from './verdict'
@@ -35,8 +36,11 @@ import { waveSystem } from './waves'
  * monsters take their step first, so every arrow this step flies at where a
  * monster *is*, not where it stood a step ago. `leak` after both — an arrival
  * costs a life only once movement and combat have had their say — and
- * `verdict` last, judging the step's final state: a run is won the step its
- * last monster dies, not a step later.
+ * `verdict` next-to-last, judging the step's final state: a run is won the
+ * step its last monster dies, not a step later. `portal` closes the list so
+ * the banner `verdict` spawns this step is a door the very next click can
+ * take, and so a click that built a tower has already been spent by the time
+ * portals look at it.
  */
 export const systems: readonly System[] = [
   tempoSystem,
@@ -46,4 +50,5 @@ export const systems: readonly System[] = [
   shootSystem,
   leakSystem,
   verdictSystem,
+  portalSystem,
 ]

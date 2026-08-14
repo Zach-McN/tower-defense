@@ -1,4 +1,4 @@
-import type { Entity, System } from 'kernel-2d/runtime'
+import { learn, sceneIn, type Entity, type System } from 'kernel-2d/runtime'
 
 import { isLife } from './leak'
 import { wavesWaiting } from './waves'
@@ -65,7 +65,36 @@ const decided = new WeakSet<readonly Entity[]>()
 
 function decide(entities: Entity[], won: boolean): void {
   decided.add(entities)
-  entities.push(bannerFor(entities, won))
+
+  const banner = bannerFor(entities, won)
+
+  // The way home: the level's Ground authors where (`home`, on the prefab),
+  // and the banner itself becomes the portal — one click on the trophy or the
+  // skull and `portal.ts` walks it. A level authoring no home has a banner
+  // that is only a banner, which is every sandbox and every older test.
+  const home = homeOf(entities)
+  if (home !== null) banner.components['portal'] = { scene: home, reach: 24 }
+
+  entities.push(banner)
+
+  // "Which have been completed" is a remembered fact, kept under the scene's
+  // own path — the name the level select's portals already hold. Quiet when
+  // no story carrier joined the run (game-code T3's degrade).
+  if (won) {
+    const scene = sceneIn(entities)
+    if (scene !== null) learn(entities, scene, { won: true })
+  }
+}
+
+/** Where this level's banner leads, or null when no entity authors a `home`. */
+function homeOf(entities: readonly Entity[]): string | null {
+  for (const entity of entities) {
+    const component: unknown = entity.components['home']
+    if (typeof component !== 'object' || component === null) continue
+    const scene: unknown = (component as { scene?: unknown }).scene
+    if (typeof scene === 'string' && scene.length > 0) return scene
+  }
+  return null
 }
 
 /**

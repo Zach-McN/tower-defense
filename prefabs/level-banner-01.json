@@ -1,0 +1,26 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "3925ffcc03e8eb13",
+  "name": "Level 1 banner",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "f4403605c5f5e169",
+        "path": "assets/textures/tokens/banner-1.png"
+      }
+    },
+    "portal": {
+      "scene": "scenes/level-01.json",
+      "reach": 16,
+      "done": {
+        "texture": {
+          "id": "3abada7b6a337798",
+          "path": "assets/textures/tokens/check.png"
+        }
+      }
+    }
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}

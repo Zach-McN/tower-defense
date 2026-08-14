@@ -1,7 +1,7 @@
 {
   "format": "kernel2d.project",
   "version": 1,
-  "startupScene": "scenes/level-01.json",
-  "generatedBy": "claude-opus-5",
-  "generatedAt": "2026-08-13"
+  "startupScene": "scenes/select.json",
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
 }

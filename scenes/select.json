@@ -1,0 +1,32 @@
+{
+  "format": "kernel2d.scene",
+  "version": 1,
+  "entities": [
+    {
+      "id": "5d1e8a3f7b2c4960",
+      "name": "Ground",
+      "transform": { "x": 160, "y": 96, "rotation": 0, "scaleX": 20, "scaleY": 12 },
+      "components": {
+        "prefab": { "source": { "id": "d62813ec02ca1b7f", "path": "prefabs/ground.json" } }
+      }
+    },
+    {
+      "id": "7f3a9c1e5d8b2064",
+      "name": "Level 1",
+      "transform": { "x": 120, "y": 96, "rotation": 0, "scaleX": 2, "scaleY": 2 },
+      "components": {
+        "prefab": { "source": { "id": "3925ffcc03e8eb13", "path": "prefabs/level-banner-01.json" } }
+      }
+    },
+    {
+      "id": "9b5d1f3a7e2c8460",
+      "name": "Level 2",
+      "transform": { "x": 200, "y": 96, "rotation": 0, "scaleX": 2, "scaleY": 2 },
+      "components": {
+        "prefab": { "source": { "id": "9fd92937ea806c41", "path": "prefabs/level-banner-02.json" } }
+      }
+    }
+  ],
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}

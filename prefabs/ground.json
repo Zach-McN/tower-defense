@@ -13,6 +13,9 @@
     "grid": {
       "tileSize": 16
     },
+    "home": {
+      "scene": "scenes/select.json"
+    },
     "wares": {
       "chosen": {
         "texture": {

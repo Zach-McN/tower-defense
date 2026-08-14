@@ -383,6 +383,64 @@ A catalogue exemplar can be parked off the map edge — the display row beside
 the wave queue — because offered-by-presence (T13) never asked where the
 example stands, only that it does. _[earned 2026-08-14]_
 
+### T15: The market's other verbs — a ladder is type data, a climb is run state, and merchandise is marked
+
+Upgrade and sell (`trade.ts` for the arithmetic, `build.ts` for the click
+routing) split cleanly along the same line every earlier feature drew:
+
+- **The tiers ladder is on the tower's prefab** (`tiers: [rung, rung]`, each a
+  price plus the numbers it raises, written as new values). What a *type's*
+  second rung costs is type data, exactly as its speed is (T5). A rung cannot
+  carry a texture or a role — the spec forbids sideways upgrades and the
+  shape cannot express one. One malformed rung refuses the whole ladder (T3).
+- **How far a tower has climbed is run state** — a WeakMap standing (T6),
+  dead at Stop — *shown* as star-pip entities above the tower (the board says
+  everything, T11). `shoot` and `march` read effective numbers through
+  `towerAt`/`slowAt` inside their own component readers, so nothing else in
+  the game knows tiers exist.
+- **What one click means is decided in order** (`build.ts`): a ware chooses,
+  an armed sell (`X`, one-shot, shown by the marker swapping to the selling
+  sign) sells, an owned tower upgrades, a vacant pad builds. Same clicked
+  list read once, no click consumed twice by accident.
+- **"Everything spent" is a sum `trade.ts` keeps** — base price plus rungs
+  bought — and the refund (70%, floor) lands as a coin wearing the
+  `wares.coin` face, because a refund with no authored face drops nothing
+  rather than inventing art (T3's degrade).
+- **The ware mark** (`ware: {}`, empty like `spawn`) says *merchandise*: the
+  marked shop row is the catalogue, never fights, and cannot be sold or
+  upgraded; bought copies shed the mark. It exists because the unmarked shop
+  row was quietly wrong — the level-01 mage could snipe monsters filing past
+  the map edge, which nobody authored. A level with no marks falls back to
+  offering its distinct standing kinds, so sandboxes and old tests hold.
+
+_[earned 2026-08-14]_
+
+### T16: The menu is a scene, a banner is a prefab, and "completed" is a remembered fact — the sixth dodge
+
+The spec's *Level select* ("the list of levels and which have been completed.
+Minimal; a menu") is `scenes/select.json`: a Ground and one numbered-pennant
+banner per level (`prefabs/level-banner-*.json` — a banner *for level 1* is a
+kind of thing, T7 again). The whole mechanism is one component and one system:
+
+- **`portal: { scene, reach?, done? }`** on a banner names the scene a click
+  opens, through the kernel's door seam (`openDoor` — the ask crosses as an
+  entity, the host does the opening). `portal.done.texture` names the check
+  art, loaded by the texture-field rule.
+- **`portal.ts`** routes clicks to portals and hangs a check on every portal
+  whose remembered fact says won. It runs last in `index.ts`, so the banner
+  `verdict` spawns is a door the next click can take.
+- **Victory learns `facts[scene] = { won: true }`** through the kernel's
+  story seam — the scene's own path is the key, stated by the host on the
+  story carrier, because a system cannot know its own file name any other
+  way. `verdict.ts` also gives its banner a portal home, aimed at the `home`
+  scene the Ground prefab authors: the trophy and the skull are the way back.
+- **A run with no story carrier** (every older test, a sandbox) wins quietly,
+  travels nowhere, shows no checks — the menu degrades, never throws (T3).
+
+The export ships what doors reach (`sceneRefsOf`, the `scene`-key mirror of
+the texture rule) — so `project.json` starting on the select ships both
+levels. _[earned 2026-08-14]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -462,12 +520,20 @@ _[earned 2026-08-13]_
 - `src/systems/tempo.ts` — the speed controls: the `tempo` component's glyph
   art, the toggle keys, and `tempoOf`, the number every time-spending system
   multiplies by (T12).
-- `src/systems/build.ts` — buying: the `buildable` tile kind, the `price` and
-  `coin` components' spending half, and the offered-by-presence rule (T13).
+- `src/systems/build.ts` — spending: the `buildable` tile kind, the `coin`
+  component's spending half, the offered-by-presence rule, and what one click
+  means in what order — choose, sell, upgrade, build (T13, T15).
+- `src/systems/trade.ts` — the market's arithmetic: the `price`, `tiers` and
+  `ware` components, a tower's climb and everything spent on it, effective
+  numbers (`towerAt`/`slowAt`), the refund rate, and the `wares` art bundle
+  reader (T15).
+- `src/systems/portal.ts` — the `portal` component, click-to-travel through
+  the kernel's door, and the completion checks read from the story (T16).
 - `src/systems/leak.ts` — the `life` component, what counts as arriving, and
   which heart a leak takes (T11).
-- `src/systems/verdict.ts` — the `outcome` and `verdict` components, what each
-  ending requires the level to have authored, and the banner (T11).
+- `src/systems/verdict.ts` — the `outcome`, `verdict` and `home` components,
+  what each ending requires the level to have authored, the banner, and what
+  victory learns through the story seam (T11, T16).
 - `src/systems/route.ts` — what a drawn road *is*: the `grid`, `tile`, `spawn` and
   `goal` components, how the order is derived from them, every way a level can
   fail to describe a road — and the once-per-run road cache (`routeThrough`),
@@ -479,8 +545,12 @@ _[earned 2026-08-13]_
   and therefore the speeds *and healths* (T5 — both halves of the spec's
   "speed-and-health combination" now live there).
 - `prefabs/tower-archer.json`, `prefabs/tower-mage.json`,
-  `prefabs/tower-frost.json` — the three buildable kinds: single-target,
-  splash, and slow, each carrying its `price` (T8, T9, T13, T14).
+  `prefabs/tower-frost.json`, `prefabs/tower-ballista.json` — the four
+  buildable kinds: single-target, splash, slow, and long-range, each carrying
+  its `price` and its `tiers` ladder (T8, T9, T13, T14, T15).
+- `prefabs/level-banner-01.json`, `prefabs/level-banner-02.json` — the level
+  select's pennants: one `portal` each, plus the check art for a completed
+  level (T16).
 - `prefabs/coin.json` — the placeable ten-gold coin: how a level draws its
   starting purse (T13).
 - `prefabs/tile-buildable.json` — the third tile kind, where building happens
@@ -488,16 +558,17 @@ _[earned 2026-08-13]_
 - `prefabs/wave-break.json` — the banner that splits the drawn queue into waves
   (T10).
 - `prefabs/life.json` — a heart: one life, counted by placement (T11).
-- `prefabs/ground.json` — the backdrop, the grid (TG3), and the board-centre
-  glyph art: `outcome` for the verdict banner (T11), `tempo` for the pause and
-  fast-forward signs (T12).
+- `prefabs/ground.json` — the backdrop, the grid (TG3), the way `home` (T16),
+  and the board-centre glyph art: `outcome` for the verdict banner (T11),
+  `tempo` for the pause and fast-forward signs (T12), `wares` for the chosen
+  arrow, the selling sign, the refund coin's face and the tier star (T14, T15).
 - `prefabs/road-tile.json`, `prefabs/road-spawn.json`, `prefabs/road-goal.json` —
   the three kinds of road tile, and therefore the two ends (T7). All three carry
   `tile: { kind: "path" }`; the two ends add an empty `spawn` or `goal`.
-- `prefabs/ground.json` — what placing a backdrop places. It is what carries `grid`
-  into a level (TG3).
-- `scenes/level-01.json` — the first level. Generated scaffolding, marked as such,
-  meant to be replaced.
+- `scenes/level-01.json`, `scenes/level-02.json` — the two levels;
+  `scenes/select.json` — the menu, itself a scene (T16). All generated
+  scaffolding, marked as such, meant to be replaced. `project.json` starts the
+  game on the select.
 - `docs/authoring.md` — the human's page: how to draw a road and place a monster with
   the tools that exist today.
 - `tsconfig.json` and `vitest.config.ts` — the two files here that say where the

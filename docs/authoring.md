@@ -7,8 +7,8 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **three kinds of tower — archer, mage, frost — and the number keys
-choose which one a click buys** (2026-08-14).
+Last true as of: **a level select with remembered completion, two levels, four
+towers, upgrade tiers, and selling** (2026-08-14).
 
 ---
 
@@ -31,10 +31,16 @@ pointing at the wrong place. Double-clicking it then says exactly that and waits
 nothing is lost, and a session puts it right in one command. Moving the whole
 `gamedev` folder as one piece is fine and needs nothing.
 
-It opens on `scenes/level-01.json` — a green field, a brown road with two corners,
-two archer posts standing at the road's bends, a row of five hearts by the goal, and
-a line of monsters queued up in the dark to the left of the map: the level's two
-waves, drawn where they will come in from, with a little banner splitting them.
+It opens on `scenes/select.json` — the level select, which is itself just a scene:
+a green field with a numbered pennant per level. Press Play and click a pennant to
+enter that level; win it and the pennant wears a green check from then on. To edit a
+*level*, open it from the Assets panel like any scene — `scenes/level-01.json` is a
+green field, a brown road with two corners, two archer posts standing at the road's
+bends, a row of five hearts by the goal, a shop row of four towers parked off the
+map edge, and a line of monsters queued up in the dark to the left of the map: the
+level's two waves, drawn where they will come in from, with a little banner
+splitting them. `scenes/level-02.json` is the harder one: an S-shaped road, three
+waves, three lives.
 
 **All of that is generated scaffolding and it is meant to be replaced.** Every file
 in it says so inside itself: art, level, prefabs, the lot. Replace any piece whenever
@@ -71,24 +77,43 @@ nothing; too many and the change is dropped at the new tower's foot. Building wo
 while paused, and that is the intended rhythm: pause, look, spend, unpause. What
 you cannot do is build on the grass — no pad, no tower — or twice on one pad.
 
-**The number keys choose what to buy.** A little golden arrow hangs over one
-standing example of the chosen kind — press **1**, **2**, **3** to move it between
-the kinds this level shows, in the order they appear. Level 1 sells three:
+**The number keys choose what to buy — or click the ware itself.** A little golden
+arrow hangs over one piece of the shop row; press **1**–**4**, or click a ware, to
+move it. Both levels sell all four:
 
 | Key | Tower | Price | What it does |
 |---|---|---|---|
 | 1 | Archer post | 30 | Steady single-target arrows. The backbone. |
 | 2 | Mage spire | 45 | Slower bolts that hit everything packed around the target. |
 | 3 | Frost totem | 25 | No shots at all — everything walking near it moves at half speed. |
+| 4 | Ballista | 40 | Nearly twice the reach of anything else, one heavy spear every two seconds. |
+
+**Click a tower you own to upgrade it.** Every tower type has a short ladder of
+tiers; each click buys the next rung with coins from the board, raises that tower's
+numbers, and hangs another gold star above it. Two rungs per type, prices rising —
+at the top of the ladder, or short of coins, the click does nothing. The rungs and
+their prices live on the tower's prefab under `tiers`, editable in a text editor
+like every other number.
+
+**Press X, then click a tower, to sell it.** While a sell is armed the golden arrow
+becomes a coin-and-arrow sign; the next click sells the tower it lands on for
+**seventy percent of everything spent on it** — price plus rungs — dropped as a
+coin where it stood. A click anywhere else stands the sell down, and so does
+pressing a number key. The shop row cannot be sold, and neither can anything twice.
 
 The level ends one of two ways, and says so in the middle of the map:
 
-- **A trophy** — you cleared every wave with a heart still standing. Won.
+- **A trophy** — you cleared every wave with a heart still standing. Won, and
+  remembered: the level select shows a check on this level from now on, even after
+  the editor is closed.
 - **A skull** — the last heart is gone. Lost, and the spacebar will not bring any
   more waves.
 
+**Click the trophy or the skull to go back to the level select.** Winning again is
+fine; losing forgets nothing.
+
 Press Stop and everything is back where it started — waves re-queued, hearts
-restored, coins gone.
+restored, coins gone. Only the completion checks persist.
 
 ---
 
@@ -278,9 +303,8 @@ Runner drops 5 gold, a Brute 20:
 "bounty": { "gold": 5 }
 ```
 
-There is nothing to spend gold on yet, so for now the coins simply lie where they
-were earned — but each one remembers its worth, ready for the day towers are bought
-mid-level.
+Coins lie where they were earned until they are spent — on new towers, on upgrade
+rungs — and every coin remembers its worth, change and refunds included.
 
 ---
 
@@ -297,12 +321,16 @@ thirty gold, exactly one archer post. Everything the player can spend is visible
 the map before they spend it: the purse you placed, plus the bounties their kills
 drop.
 
-**A level offers the towers it shows.** Building copies a tower already standing in
-the level, so what you place is both defense and catalogue. A tower you want to
-*sell* without pre-building can stand off the map edge, like level 1's mage spire
-and frost totem parked beside the monster queue — the display row is far enough
-from the road that it never joins the fight. A level with no tower placed offers
-nothing to build — pads or not.
+**A level offers the towers it shows, and the shop row is marked.** Building copies
+a standing example, so the catalogue is a display row of towers parked off the map
+edge — one of each kind for sale, in the order the number keys should pick them.
+Each display piece carries a `ware` mark (two lines typed into the level file on
+the placed instance: `"ware": {}` beside its `prefab`), which is what says
+*merchandise*: a marked tower never shoots, never chills, and cannot be sold or
+upgraded. Towers placed *without* the mark are the player's starting defense —
+they fight from the first step, and the player may upgrade or sell them. A level
+with no marked wares falls back to offering one of each unmarked kind it shows; a
+level with no towers at all offers nothing — pads or not.
 
 ---
 
@@ -344,6 +372,28 @@ during play, cost gold, and vanish with Stop like everything else a run does.
 
 ---
 
+## The level select
+
+The menu is a scene like any other, and you author it the same way:
+`scenes/select.json` holds the Ground and one **level banner** per level —
+`prefabs/level-banner-01.json` and `-02.json`, a numbered pennant each. During
+play, clicking a banner opens its level; a level that has been won wears a green
+check on its banner, and the game remembers that across sessions (it sleeps in the
+browser, not in any file of this game).
+
+**To add a level to the menu**, copy a banner prefab, point its `portal` at the new
+scene file, give it its own numeral art, and place it in the select scene. The
+`portal` component is the whole mechanism:
+
+```json
+"portal": { "scene": "scenes/level-03.json", "reach": 16 }
+```
+
+**Every level knows the way home** — the Ground prefab carries it — which is why
+the trophy and the skull are clickable: one click and you are back at the menu.
+
+---
+
 ## When nothing walks
 
 A monster standing still is either finished or stuck, and they look the same. There
@@ -364,19 +414,19 @@ is the checklist:
 
 ## What this game cannot do yet
 
-- **Upgrade or sell a tower.** Tiers and refunds are designed but not built.
-- **The long-range role.** Three of the four committed tower roles exist;
-  the far-seeing cheap-hitting one does not yet.
 - **A Call Wave button on screen.** The spacebar is the button, P and F are the
-  speed controls, a click is the trowel. Nothing on the screen lists the keys,
-  counts the waves, or shows how many are left — the glyphs that appear mid-map
-  are the only report.
-- **Build a tower during play.** Towers are placed in the editor before Play is
-  pressed. Buying them mid-level with gold is the game's real loop and it is not
-  here yet.
-- **Upgrade or sell a tower.** One kind of tower, one tier.
+  speed controls, X arms a sale, a click is the trowel. Nothing on the screen
+  lists the keys, counts the waves, or shows how many are left — the glyphs that
+  appear mid-map are the only report.
+- **The scenery tile kind.** The design has three kinds of tile; `path` and
+  `buildable` exist, decorative scenery does not.
 - **See a tower's range before Play.** Nothing draws the circle; three tiles from
-  the post, counted by eye.
+  an archer post, five and a bit from a ballista, counted by eye.
+- **See a tier's numbers before buying.** The stars say how high a tower stands;
+  nothing on screen says what the next rung costs or raises. The prefab file does.
+- **Forget a completed level.** The checks on the level select persist in the
+  browser; nothing in the editor clears them. (Clearing the browser's site data
+  does.)
 - **Keep a tower off the road.** Nothing refuses a tower placed on a road tile;
   monsters walk through it.
 - **Paint a road by dragging along it.** One click per tile. Clicking is quick enough
@@ -392,7 +442,3 @@ is the checklist:
 - **Say why a road is broken** — including the easiest one to do by accident, two
   spawn tiles. Nothing is reported; the level simply does not walk. See *When nothing
   walks*.
-- **Buildable and scenery tiles.** The design has three kinds of tile; only `path`
-  exists. A tower can be put anywhere the grass is, because nothing yet says which
-  squares are buildable — that distinction starts mattering when towers are bought
-  during play rather than placed in the editor.
