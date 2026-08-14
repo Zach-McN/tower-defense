@@ -518,49 +518,115 @@
     {
       "id": "4f2a8c1e6b9d3750",
       "name": "Pad 1",
-      "transform": { "x": 56, "y": 56, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 56,
+        "y": 56,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
       }
     },
     {
       "id": "6d4b2f9a8c1e5073",
       "name": "Pad 2",
-      "transform": { "x": 104, "y": 24, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 104,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
       }
     },
     {
       "id": "8f6d4a2c1b3e7095",
       "name": "Pad 3",
-      "transform": { "x": 120, "y": 88, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 120,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
       }
     },
     {
       "id": "a18f6c4e2d5b9037",
       "name": "Pad 4",
-      "transform": { "x": 184, "y": 120, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 184,
+        "y": 120,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
       }
     },
     {
       "id": "c3a18e6f4b7d2059",
       "name": "Pad 5",
-      "transform": { "x": 232, "y": 152, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 232,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
       }
     },
     {
       "id": "e5c3a08f6d1b4279",
       "name": "Pad 6",
-      "transform": { "x": 264, "y": 120, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 264,
+        "y": 120,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+        "prefab": {
+          "source": {
+            "id": "173838f7aaff14d3",
+            "path": "prefabs/tile-buildable.json"
+          }
+        }
       }
     },
     {
@@ -718,61 +784,138 @@
     {
       "id": "8e2f5a1c9d3b7046",
       "name": "Archer ware",
-      "transform": { "x": 0, "y": 8, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 0,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "2803339dcb617c4e", "path": "prefabs/tower-archer.json" } },
+        "prefab": {
+          "source": {
+            "id": "2803339dcb617c4e",
+            "path": "prefabs/tower-archer.json"
+          }
+        },
         "ware": {}
       }
     },
     {
       "id": "7a3e9c5b1f8d2046",
       "name": "Mage spire",
-      "transform": { "x": -24, "y": 8, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": -24,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "2e1ca31313247666", "path": "prefabs/tower-mage.json" } },
+        "prefab": {
+          "source": {
+            "id": "2e1ca31313247666",
+            "path": "prefabs/tower-mage.json"
+          }
+        },
         "ware": {}
       }
     },
     {
       "id": "9c5b7e3a2d1f4068",
       "name": "Frost totem",
-      "transform": { "x": -48, "y": 8, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": -48,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "ddad785541b8c4eb", "path": "prefabs/tower-frost.json" } },
+        "prefab": {
+          "source": {
+            "id": "ddad785541b8c4eb",
+            "path": "prefabs/tower-frost.json"
+          }
+        },
         "ware": {}
       }
     },
     {
       "id": "4c7e2b8f1a5d3096",
       "name": "Ballista ware",
-      "transform": { "x": -72, "y": 8, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": -72,
+        "y": 8,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "2f8cbc41f5b50773", "path": "prefabs/tower-ballista.json" } },
+        "prefab": {
+          "source": {
+            "id": "2f8cbc41f5b50773",
+            "path": "prefabs/tower-ballista.json"
+          }
+        },
         "ware": {}
       }
     },
     {
       "id": "0d7f3b9e5a2c8164",
       "name": "Purse 1",
-      "transform": { "x": 24, "y": 168, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 24,
+        "y": 168,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "74b01ef7fc62dfc0", "path": "prefabs/coin.json" } }
+        "prefab": {
+          "source": {
+            "id": "74b01ef7fc62dfc0",
+            "path": "prefabs/coin.json"
+          }
+        }
       }
     },
     {
       "id": "2f9d5b1a7c4e8360",
       "name": "Purse 2",
-      "transform": { "x": 40, "y": 168, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 40,
+        "y": 168,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "74b01ef7fc62dfc0", "path": "prefabs/coin.json" } }
+        "prefab": {
+          "source": {
+            "id": "74b01ef7fc62dfc0",
+            "path": "prefabs/coin.json"
+          }
+        }
       }
     },
     {
       "id": "4b1f7d3c9e5a2086",
       "name": "Purse 3",
-      "transform": { "x": 56, "y": 168, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 56,
+        "y": 168,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "74b01ef7fc62dfc0", "path": "prefabs/coin.json" } }
+        "prefab": {
+          "source": {
+            "id": "74b01ef7fc62dfc0",
+            "path": "prefabs/coin.json"
+          }
+        }
       }
     },
     {
@@ -892,49 +1035,153 @@
     {
       "id": "1a2b3c4d5e6f7a81",
       "name": "Tree 1",
-      "transform": { "x": 32, "y": 152, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 32,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "c97f9b523e676a25", "path": "prefabs/scenery-tree.json" } }
+        "prefab": {
+          "source": {
+            "id": "c97f9b523e676a25",
+            "path": "prefabs/scenery-tree.json"
+          }
+        }
       }
     },
     {
       "id": "2b3c4d5e6f7a8192",
       "name": "Tree 2",
-      "transform": { "x": 64, "y": 120, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 64,
+        "y": 120,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "c97f9b523e676a25", "path": "prefabs/scenery-tree.json" } }
+        "prefab": {
+          "source": {
+            "id": "c97f9b523e676a25",
+            "path": "prefabs/scenery-tree.json"
+          }
+        }
       }
     },
     {
       "id": "3c4d5e6f7a8192a3",
       "name": "Rock 1",
-      "transform": { "x": 88, "y": 152, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 88,
+        "y": 152,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "c08b9f95f5a566b4", "path": "prefabs/scenery-rock.json" } }
+        "prefab": {
+          "source": {
+            "id": "c08b9f95f5a566b4",
+            "path": "prefabs/scenery-rock.json"
+          }
+        }
       }
     },
     {
       "id": "4d5e6f7a8192a3b4",
       "name": "Tree 3",
-      "transform": { "x": 200, "y": 56, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 200,
+        "y": 56,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "c97f9b523e676a25", "path": "prefabs/scenery-tree.json" } }
+        "prefab": {
+          "source": {
+            "id": "c97f9b523e676a25",
+            "path": "prefabs/scenery-tree.json"
+          }
+        }
       }
     },
     {
       "id": "5e6f7a8192a3b4c5",
       "name": "Rock 2",
-      "transform": { "x": 240, "y": 56, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 240,
+        "y": 56,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "c08b9f95f5a566b4", "path": "prefabs/scenery-rock.json" } }
+        "prefab": {
+          "source": {
+            "id": "c08b9f95f5a566b4",
+            "path": "prefabs/scenery-rock.json"
+          }
+        }
       }
     },
     {
       "id": "6f7a8192a3b4c5d6",
       "name": "Tree 4",
-      "transform": { "x": 296, "y": 88, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "transform": {
+        "x": 296,
+        "y": 88,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
       "components": {
-        "prefab": { "source": { "id": "c97f9b523e676a25", "path": "prefabs/scenery-tree.json" } }
+        "prefab": {
+          "source": {
+            "id": "c97f9b523e676a25",
+            "path": "prefabs/scenery-tree.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "cd97748bb52388f1",
+      "name": "Gold coin",
+      "transform": {
+        "x": 166,
+        "y": 24,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "74b01ef7fc62dfc0",
+            "path": "prefabs/coin.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "6d8703a5cb267093",
+      "name": "Brute 2",
+      "transform": {
+        "x": 219,
+        "y": 87,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "6041c2b0db33ea43",
+            "path": "prefabs/monster-brute.json"
+          }
+        }
       }
     }
   ],
