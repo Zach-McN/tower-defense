@@ -15,7 +15,7 @@
     // written down exactly once, here. If this folder moves, this line changes and
     // nothing under `src/` does.
     "paths": {
-      "kernel-2d/runtime": ["../../kernel-2d/runtime/index.ts"]
+      "kernel-2d/runtime": ["../../kernel-2d/runtime/game/api.ts"]
     }
   },
   "include": ["src/**/*.ts", "tests/**/*.ts"]

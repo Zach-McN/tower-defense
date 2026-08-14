@@ -7,7 +7,8 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **towers shoot the monsters that walk past** (2026-08-14).
+Last true as of: **waves are drawn behind the spawn and called with the spacebar**
+(2026-08-14).
 
 ---
 
@@ -31,8 +32,9 @@ nothing is lost, and a session puts it right in one command. Moving the whole
 `gamedev` folder as one piece is fine and needs nothing.
 
 It opens on `scenes/level-01.json` — a green field, a brown road with two corners,
-one monster standing at the left-hand end of the road, and two archer posts standing
-at the road's bends.
+two archer posts standing at the road's bends, and a line of monsters queued up in
+the dark to the left of the map: the level's two waves, drawn where they will come
+in from, with a little banner splitting them.
 
 **All of that is generated scaffolding and it is meant to be replaced.** Every file
 in it says so inside itself: art, level, prefabs, the lot. Replace any piece whenever
@@ -42,8 +44,14 @@ you have something better; nothing depends on it being what it is.
 
 ## Press Play
 
-The monster walks the road — and as it comes past the first bend, the archer post
-there shoots it. Arrows fly, three of them land, and the monster is gone.
+Nothing moves. The queued monsters vanish from the picture, the road stands empty,
+and the game is waiting for you — waves come when you call them, and never on a
+timer.
+
+**Press the spacebar.** The first wave files in through the spawn mouth, walks the
+road, and the archer posts start shooting as it comes into reach. Arrows fly,
+monsters fall. Press space again whenever you are ready for the next wave — including
+straight away, if you want them overlapping.
 
 A monster that gets past every tower walks to the far end and stops. It stops because
 there is nothing yet for reaching the end to *mean* — getting through is supposed to
@@ -51,7 +59,7 @@ cost you a life, and lives do not exist yet. So it stands on the last tile, and 
 towers in reach keep shooting it where it stands until it is dead. That will change
 when lives arrive.
 
-Press Stop and everything is back where it started, arrows and all.
+Press Stop and everything is back where it started — waves re-queued, arrows gone.
 
 ---
 
@@ -189,6 +197,39 @@ and falls to the third.
 
 ---
 
+## Drawing a wave
+
+**A wave is drawn, not typed.** You place its monsters in a line behind the spawn
+tile — off the left edge of the map, on the dark background — in the order they
+will walk in. Everything about the wave is the drawing:
+
+- **Which monsters, and how many** — which prefabs you place, and how many.
+- **Their order** — nearest the spawn goes first.
+- **How tightly they follow each other** — the gaps you leave between them. A
+  monster twenty units behind another comes through the spawn about a third of a
+  second later, if they walk at the same speed.
+
+To split the line into separate waves, place **`prefabs/wave-break.json`** — the
+little banner — between the groups. Everything between two banners is one wave;
+one press of the spacebar calls one wave.
+
+So the whole gesture is: click a monster prefab, **Place by clicking**, click out a
+few of them leading away from the spawn; drop a banner; draw the next wave behind
+it. The snap does not matter here — monsters can stand anywhere, so `0` is fine —
+and the queue does not have to be a perfectly straight line: whatever shape you
+draw is the shape the wave files in with.
+
+Two things worth knowing:
+
+- **How far back a wave is drawn does not delay it.** When you call a wave it is
+  slid up so its leader starts just behind the spawn — the gaps *inside* the wave
+  are kept exactly as drawn, but the dead ground between waves is not walked.
+- **A monster placed on the road is not in any wave.** It starts walking the moment
+  you press Play, exactly as before — still the quickest way to watch what one
+  tower does to one monster.
+
+---
+
 ## Placing a tower
 
 1. Click **`prefabs/tower-archer.json`** in the Assets panel.
@@ -246,9 +287,12 @@ is the checklist:
 
 ## What this game cannot do yet
 
-- **Gold, waves, lives.** Towers shoot, monsters die, and none of it costs or earns
-  anything yet. Waves and the call-wave button are next; then gold and lives, which
-  is when the game becomes winnable and losable.
+- **Gold and lives.** Towers shoot, monsters die and waves come when called, and
+  none of it costs or earns anything yet. Gold and lives are next, which is when
+  the game becomes winnable and losable.
+- **A Call Wave button on screen.** The spacebar is the button. Nothing on the
+  screen says so, counts the waves, or shows how many are left — the picture is
+  the only report.
 - **Build a tower during play.** Towers are placed in the editor before Play is
   pressed. Buying them mid-level with gold is the game's real loop and it is not
   here yet.

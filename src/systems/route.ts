@@ -160,6 +160,12 @@ export function pointAlong(route: Route, distance: number): Point {
  * makes the level's own placement a lie — a monster you dragged onto the third
  * corner would jump across the map the moment you pressed Play, with the level
  * still showing it where you left it.
+ *
+ * **Before the road begins, the answer is negative** — a point whose nearest bit
+ * of road is the spawn itself is `-gap` along, where the gap is its straight-line
+ * distance to the spawn. That is what makes a wave queue drawable: a monster
+ * placed behind the spawn has that far still to walk before its road starts, and
+ * `march` walks it in. Zero stays exactly what it was — standing on the spawn.
  */
 export function distanceAlongNearest(route: Route, point: Point): number {
   let best = 0
@@ -189,6 +195,10 @@ export function distanceAlongNearest(route: Route, point: Point): number {
     best = leftAt + Math.sqrt(span) * across
   }
 
+  // Nearest to the very start of the road means "not on it yet": how far off
+  // is how far there is still to walk. A route with no segments at all keeps
+  // the old answer, zero, rather than a minus infinity.
+  if (best === 0 && Number.isFinite(bestGap)) return -Math.sqrt(bestGap)
   return best
 }
 

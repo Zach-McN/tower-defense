@@ -46,11 +46,28 @@ export const marchSystem: System = {
 
       // Where it had got to, or — on its first step — the point on the road
       // nearest to where the level put it. So a monster dropped halfway along the
-      // road walks on from halfway rather than jumping back to the spawn.
+      // road walks on from halfway rather than jumping back to the spawn, and one
+      // placed behind the spawn starts below zero with that far still to come.
       const from = travelled.get(entity) ?? distanceAlongNearest(route, entity.transform)
       const to = Math.min(route.length, from + speed * dtSeconds)
-
       travelled.set(entity, to)
+
+      if (to < 0) {
+        // Not on the road yet: still `-to` short of the spawn, closing straight
+        // toward it from wherever it is. Walking the line it already stands on —
+        // rather than a lane the road prescribes — is what keeps a drawn queue's
+        // shape while it files in.
+        const spawn = route.points[0]
+        if (spawn === undefined) continue
+        const dx = entity.transform.x - spawn.x
+        const dy = entity.transform.y - spawn.y
+        const gap = Math.sqrt(dx * dx + dy * dy)
+        if (gap === 0) continue
+        entity.transform.x = spawn.x + (dx / gap) * -to
+        entity.transform.y = spawn.y + (dy / gap) * -to
+        continue
+      }
+
       const standing = pointAlong(route, to)
       entity.transform.x = standing.x
       entity.transform.y = standing.y

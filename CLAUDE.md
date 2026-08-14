@@ -55,8 +55,11 @@ Code here names the kernel by a package, never by a path:
 import type { Entity, System } from 'kernel-2d/runtime'
 ```
 
-`tsconfig.json` is the one file in this folder that a session maintains saying where the
-kernel actually sits. If this folder moves, that line changes and nothing under `src/` does.
+`tsconfig.json` and `vitest.config.ts` are the two files in this folder that a session
+maintains saying where the kernel actually sits — the typechecker reads one, the test
+runner the other, and both point at the kernel's game-facing surface
+(`runtime/game/api.ts`). If this folder moves, those two lines change together and
+nothing under `src/` does.
 
 `Open editor.cmd` says it too, for `cmd.exe` rather than for the typechecker, and is not
 maintained by hand: the kernel writes it (`npm run launcher -- ../games/tower-defense`) and

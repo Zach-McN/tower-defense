@@ -203,8 +203,11 @@ describe('getting onto the road from where a monster was put', () => {
     expect(distanceAlongNearest(straight, { x: centre(2, 0).x, y: centre(2, 0).y + 40 })).toBe(2 * TILE)
   })
 
-  it('is the spawn, when it stands back beyond the start', () => {
-    expect(distanceAlongNearest(straight, { x: centre(0, 0).x - 60, y: centre(0, 0).y })).toBe(0)
+  it('is short of the start by exactly its gap, when it stands back beyond it', () => {
+    // Negative on purpose: sixty units behind the spawn is sixty units of
+    // walking before its road begins, which is what makes a wave queue
+    // drawable behind the spawn. Zero still means standing on the spawn.
+    expect(distanceAlongNearest(straight, { x: centre(0, 0).x - 60, y: centre(0, 0).y })).toBe(-60)
   })
 
   it('is the goal, when it stands out past the end', () => {

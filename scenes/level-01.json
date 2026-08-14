@@ -555,9 +555,9 @@
     },
     {
       "id": "33832772472edabb",
-      "name": "Runner",
+      "name": "Runner 1",
       "transform": {
-        "x": 8,
+        "x": -8,
         "y": 40,
         "rotation": 0,
         "scaleX": 1,
@@ -569,9 +569,120 @@
             "id": "2243481b472f8a04",
             "path": "prefabs/monster-runner.json"
           }
-        },
-        "spin": {
-          "degreesPerSecond": 30
+        }
+      }
+    },
+    {
+      "id": "7d10a44c93b2e5f1",
+      "name": "Runner 2",
+      "transform": {
+        "x": -28,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "2f8be6d015c7a943",
+      "name": "Runner 3",
+      "transform": {
+        "x": -48,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "c1d9403b8ae65721",
+      "name": "Wave break",
+      "transform": {
+        "x": -64,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "5e0badee39eba7a7",
+            "path": "prefabs/wave-break.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "90e5c2a7f4d81b36",
+      "name": "Brute",
+      "transform": {
+        "x": -80,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "6041c2b0db33ea43",
+            "path": "prefabs/monster-brute.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "e37f18d06c92ab54",
+      "name": "Runner 4",
+      "transform": {
+        "x": -100,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "6ab340f9d17e28c5",
+      "name": "Runner 5",
+      "transform": {
+        "x": -116,
+        "y": 40,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2243481b472f8a04",
+            "path": "prefabs/monster-runner.json"
+          }
         }
       }
     }

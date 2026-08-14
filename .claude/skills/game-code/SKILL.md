@@ -28,6 +28,7 @@ The vocabulary now, all of it justified by a noun in `docs/GENRE-SPEC.md`:
 "components": { "health": { "total": 3 } }
 "components": { "tower": { "rangeUnits": 48, "damage": 1, "shotsPerSecond": 1,
                            "projectile": { "texture": { "id": "…", "path": "…" }, "unitsPerSecond": 160 } } }
+"components": { "waveBreak": {} }
 ```
 
 `spawn` and `goal` are components with nothing in them, which is worth stating
@@ -234,6 +235,34 @@ the authored content that causes the spawning names the art, under the one agree
 word. Nothing in this game tells the kernel what a tower or a wave is; the field
 name is the entire contract. _[earned 2026-08-14]_
 
+### T10: A wave is drawn, not typed — the fourth dodge of the authoring-surface question, and the biggest
+
+The wave list was `genre-spinup`'s named example of the thing that would finally
+force a bespoke authoring surface: authored, per-level, and unreachable by the
+Inspector. It fired nothing, by the established move — **ask what the thing is
+before asking what would edit it** — applied to every clause of the spec's own
+definition. *"Which types, how many, in what order, how tightly spaced"*: which
+prefabs were placed, how many were placed, and where they stand. So a level's
+wave list is its monsters **placed in a queue behind the spawn tile**, split
+into waves by a break marker that is a kind of thing and therefore a prefab
+(`wave-break.json`, T7's move re-used), and the whole of wave authoring is the
+placement gestures the editor already has.
+
+What made it expressible as geometry: `route.ts` extended "how far along the
+road" to be **negative before the spawn** — a queued monster's distance is how
+far it has still to walk before its road begins — and `march` walks a negative
+monster straight in through the spawn mouth. `waves` confiscates everything
+negative (and every break, wherever it stands) at the run's first step, holds
+it beside the run (T6), and releases one wave per press, slid up as a block so
+the leader starts just behind the spawn: **gaps inside a wave are the author's;
+dead ground between waves is not walked.** Order in `index.ts` is load-bearing:
+`waves` before `march`, or the first step walks the queue before it can be held.
+
+The call is the spacebar, read with the kernel's `pressedIn` — input arrives as
+data on an entity the runner injects, so a test presses a key by putting
+`inputEntity(['Space'])` in its fixture list. This game is the consumer that
+input seam was shaped by. _[earned 2026-08-14]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -307,6 +336,8 @@ _[earned 2026-08-13]_
   bookkeeping lives (T6).
 - `src/systems/shoot.ts` — combat whole: the `tower` and `health` components,
   arrows, wounds, cooldowns, targeting and death (T8, T9).
+- `src/systems/waves.ts` — the drawn queue: the `waveBreak` component, what is
+  confiscated and when, and the spacebar as Call Wave (T10).
 - `src/systems/route.ts` — what a drawn road *is*: the `grid`, `tile`, `spawn` and
   `goal` components, how the order is derived from them, every way a level can
   fail to describe a road — and the once-per-run road cache (`routeThrough`),
@@ -319,6 +350,8 @@ _[earned 2026-08-13]_
   "speed-and-health combination" now live there).
 - `prefabs/tower-archer.json` — the first tower: its numbers, and the arrow's art
   and speed inside its `tower` component (T8, T9).
+- `prefabs/wave-break.json` — the banner that splits the drawn queue into waves
+  (T10).
 - `prefabs/road-tile.json`, `prefabs/road-spawn.json`, `prefabs/road-goal.json` —
   the three kinds of road tile, and therefore the two ends (T7). All three carry
   `tile: { kind: "path" }`; the two ends add an empty `spawn` or `goal`.
@@ -328,8 +361,14 @@ _[earned 2026-08-13]_
   meant to be replaced.
 - `docs/authoring.md` — the human's page: how to draw a road and place a monster with
   the tools that exist today.
-- `tsconfig.json` — the only file here that says where the kernel sits on disk. Code
-  names the package `kernel-2d/runtime` and never a path.
+- `tsconfig.json` and `vitest.config.ts` — the two files here that say where the
+  kernel sits on disk, because the typechecker and the test runner each need
+  telling and neither reads the other. Both point at `runtime/game/api.ts` — the
+  kernel's game-facing, DOM-free surface, which exists because the full runtime
+  barrel reaches Phaser and Phaser reaches for `window`, and this game's tests
+  run in plain Node. Code names the package `kernel-2d/runtime` and never a path;
+  if this folder moves, those two lines change together and nothing under `src/`
+  does.
 - `package.json` — this game's own test runner. The kernel's suite cannot reach in
   here by design (`genre-spinup` S5).
 - `docs/GENRE-SPEC.md` — the fence. Nothing gets built here without a noun in it.

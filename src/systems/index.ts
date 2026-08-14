@@ -2,6 +2,7 @@ import type { System } from 'kernel-2d/runtime'
 
 import { marchSystem } from './march'
 import { shootSystem } from './shoot'
+import { waveSystem } from './waves'
 
 /**
  * Every system this game runs, in the order it runs them.
@@ -20,8 +21,11 @@ import { shootSystem } from './shoot'
  * belongs to the sample project, and this game has no noun that justifies anything
  * turning.
  *
- * `march` before `shoot`, and the order is load-bearing: monsters take their
- * step first, so every arrow this step flies at where a monster *is*, not where
- * it stood a step ago.
+ * `waves` first, and its place in the line is load-bearing twice over: it must
+ * confiscate the drawn queue before `march`'s first step can move a waiting
+ * monster, and a wave called this step must be in the level before `march`
+ * walks and `shoot` aims. Then `march` before `shoot`: monsters take their
+ * step first, so every arrow this step flies at where a monster *is*, not
+ * where it stood a step ago.
  */
-export const systems: readonly System[] = [marchSystem, shootSystem]
+export const systems: readonly System[] = [waveSystem, marchSystem, shootSystem]

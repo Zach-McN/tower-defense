@@ -1,0 +1,17 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "5e0badee39eba7a7",
+  "name": "Wave break",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "86f5793eb9cc7627",
+        "path": "assets/textures/markers/wave-break.png"
+      }
+    },
+    "waveBreak": {}
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}
