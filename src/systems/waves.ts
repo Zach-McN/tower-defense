@@ -54,6 +54,10 @@ export const waveSystem: System = {
     const waiting = queueOf(entities)
     if (waiting === null) return
 
+    // A decided level takes no more calls: the run is over, and a wave walking
+    // in past the verdict banner would be the game contradicting itself.
+    if (entities.some((entity) => entity.components['verdict'] !== undefined)) return
+
     for (const press of pressedIn(entities)) {
       if (press !== CALL_WAVE) continue
       const wave = waiting.shift()
@@ -61,6 +65,19 @@ export const waveSystem: System = {
       entities.push(...wave)
     }
   },
+}
+
+/**
+ * How many waves are still waiting, or null before the queue has been taken —
+ * which, systems running in list order, means "asked before `waves` ran".
+ *
+ * Exported for `verdict.ts`, which cannot know "the wave list is cleared" any
+ * other way: the queue was confiscated out of the level precisely so nothing
+ * else would trip over it, so the one thing that holds it answers for it.
+ */
+export function wavesWaiting(entities: readonly Entity[]): number | null {
+  const waiting = queues.get(entities)
+  return waiting === undefined ? null : waiting.length
 }
 
 /** The button. `KeyboardEvent.code`, so it is the physical spacebar anywhere. */

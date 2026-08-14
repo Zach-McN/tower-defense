@@ -1,7 +1,9 @@
 import type { System } from 'kernel-2d/runtime'
 
+import { leakSystem } from './leak'
 import { marchSystem } from './march'
 import { shootSystem } from './shoot'
+import { verdictSystem } from './verdict'
 import { waveSystem } from './waves'
 
 /**
@@ -26,6 +28,9 @@ import { waveSystem } from './waves'
  * monster, and a wave called this step must be in the level before `march`
  * walks and `shoot` aims. Then `march` before `shoot`: monsters take their
  * step first, so every arrow this step flies at where a monster *is*, not
- * where it stood a step ago.
+ * where it stood a step ago. `leak` after both — an arrival costs a life only
+ * once movement and combat have had their say — and `verdict` last, judging
+ * the step's final state: a run is won the step its last monster dies, not a
+ * step later.
  */
-export const systems: readonly System[] = [waveSystem, marchSystem, shootSystem]
+export const systems: readonly System[] = [waveSystem, marchSystem, shootSystem, leakSystem, verdictSystem]

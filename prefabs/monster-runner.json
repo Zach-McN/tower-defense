@@ -15,6 +15,13 @@
     },
     "health": {
       "total": 3
+    },
+    "bounty": {
+      "gold": 5,
+      "texture": {
+        "id": "a754b8d220f0ac58",
+        "path": "assets/textures/tokens/coin.png"
+      }
     }
   },
   "generatedBy": "claude-opus-5",

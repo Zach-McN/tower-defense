@@ -92,6 +92,11 @@ export function archer(
   })
 }
 
+/** One heart. How many stand is how many lives the level has. */
+export function life(at: { x: number; y: number }, name = 'Life'): Entity {
+  return entity(name, at.x, at.y, { life: {} })
+}
+
 /**
  * The same entities in a different order.
  *

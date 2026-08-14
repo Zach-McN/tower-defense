@@ -1,0 +1,17 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "ab457322d109b124",
+  "name": "Life",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "359b636e7c15c332",
+        "path": "assets/textures/tokens/heart.png"
+      }
+    },
+    "life": {}
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}

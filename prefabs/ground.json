@@ -12,6 +12,20 @@
     },
     "grid": {
       "tileSize": 16
+    },
+    "outcome": {
+      "victory": {
+        "texture": {
+          "id": "fffb0dfeb24b5be4",
+          "path": "assets/textures/tokens/trophy.png"
+        }
+      },
+      "defeat": {
+        "texture": {
+          "id": "4eae6cba74e43aa9",
+          "path": "assets/textures/tokens/skull.png"
+        }
+      }
     }
   },
   "generatedBy": "claude-opus-5",

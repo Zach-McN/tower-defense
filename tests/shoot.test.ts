@@ -124,6 +124,31 @@ describe('an arrow landing', () => {
     expect(entities).not.toContain(prey)
   })
 
+  it('drops the dead monster\'s bounty as a coin where it fell', () => {
+    const prey = monster(centre(2, 2), 56, 1)
+    prey.components['bounty'] = { gold: 5, texture: { id: 'coin-texture', path: 'assets/textures/tokens/coin.png' } }
+    const entities = [...straightRoad(), archer(centre(2, 3)), prey]
+
+    step(entities, 2)
+
+    expect(entities).not.toContain(prey)
+    const coin = entities.find((one) => one.name === 'Coin')
+    expect(coin?.components['coin']).toEqual({ gold: 5 })
+    expect(coin?.components['sprite']).toEqual({
+      texture: { id: 'coin-texture', path: 'assets/textures/tokens/coin.png' },
+    })
+  })
+
+  it('drops nothing for a monster whose type authored no bounty', () => {
+    const prey = monster(centre(2, 2), 56, 1)
+    const entities = [...straightRoad(), archer(centre(2, 3)), prey]
+
+    step(entities, 2)
+
+    expect(entities).not.toContain(prey)
+    expect(entities.find((one) => one.name === 'Coin')).toBeUndefined()
+  })
+
   it('fades with a target another arrow already killed', () => {
     const prey = monster(centre(2, 2), 56, 1)
     const left = archer(centre(1, 3), { name: 'Left post' })

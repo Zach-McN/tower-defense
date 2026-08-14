@@ -668,6 +668,101 @@
       }
     },
     {
+      "id": "1c2e8f4a6b3d5079",
+      "name": "Life 1",
+      "transform": {
+        "x": 248,
+        "y": 168,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ab457322d109b124",
+            "path": "prefabs/life.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "3e5a7c9b1d2f4680",
+      "name": "Life 2",
+      "transform": {
+        "x": 264,
+        "y": 168,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ab457322d109b124",
+            "path": "prefabs/life.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "5b7d9e1f3a4c6802",
+      "name": "Life 3",
+      "transform": {
+        "x": 280,
+        "y": 168,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ab457322d109b124",
+            "path": "prefabs/life.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "7d9f1a3b5c6e8024",
+      "name": "Life 4",
+      "transform": {
+        "x": 296,
+        "y": 168,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ab457322d109b124",
+            "path": "prefabs/life.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "9f1b3c5d7e8a0246",
+      "name": "Life 5",
+      "transform": {
+        "x": 312,
+        "y": 168,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "ab457322d109b124",
+            "path": "prefabs/life.json"
+          }
+        }
+      }
+    },
+    {
       "id": "6ab340f9d17e28c5",
       "name": "Runner 5",
       "transform": {

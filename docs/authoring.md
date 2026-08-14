@@ -7,8 +7,8 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **waves are drawn behind the spawn and called with the spacebar**
-(2026-08-14).
+Last true as of: **levels are won and lost — hearts are lives, monsters drop coins,
+and a trophy or a skull says how it ended** (2026-08-14).
 
 ---
 
@@ -32,9 +32,9 @@ nothing is lost, and a session puts it right in one command. Moving the whole
 `gamedev` folder as one piece is fine and needs nothing.
 
 It opens on `scenes/level-01.json` — a green field, a brown road with two corners,
-two archer posts standing at the road's bends, and a line of monsters queued up in
-the dark to the left of the map: the level's two waves, drawn where they will come
-in from, with a little banner splitting them.
+two archer posts standing at the road's bends, a row of five hearts by the goal, and
+a line of monsters queued up in the dark to the left of the map: the level's two
+waves, drawn where they will come in from, with a little banner splitting them.
 
 **All of that is generated scaffolding and it is meant to be replaced.** Every file
 in it says so inside itself: art, level, prefabs, the lot. Replace any piece whenever
@@ -50,16 +50,22 @@ timer.
 
 **Press the spacebar.** The first wave files in through the spawn mouth, walks the
 road, and the archer posts start shooting as it comes into reach. Arrows fly,
-monsters fall. Press space again whenever you are ready for the next wave — including
-straight away, if you want them overlapping.
+monsters fall, and **every kill drops a coin where the monster fell** — the gold
+lying on the map is the gold you have earned. Press space again whenever you are
+ready for the next wave — including straight away, if you want them overlapping.
 
-A monster that gets past every tower walks to the far end and stops. It stops because
-there is nothing yet for reaching the end to *mean* — getting through is supposed to
-cost you a life, and lives do not exist yet. So it stands on the last tile, and the
-towers in reach keep shooting it where it stands until it is dead. That will change
-when lives arrive.
+**A monster that reaches the goal takes a heart with it.** It disappears into the
+goal, and the row of hearts by the goal is one shorter. The hearts are the lives:
+what you see is the whole count.
 
-Press Stop and everything is back where it started — waves re-queued, arrows gone.
+The level ends one of two ways, and says so in the middle of the map:
+
+- **A trophy** — you cleared every wave with a heart still standing. Won.
+- **A skull** — the last heart is gone. Lost, and the spacebar will not bring any
+  more waves.
+
+Press Stop and everything is back where it started — waves re-queued, hearts
+restored, coins gone.
 
 ---
 
@@ -230,6 +236,31 @@ Two things worth knowing:
 
 ---
 
+## Giving a level its lives
+
+**Lives are hearts, and you place them.** Click **`prefabs/life.json`**, press
+**Place by clicking**, and put a row of hearts somewhere they read well — beside the
+goal is the natural spot. Five hearts is five lives; a hard level might offer three.
+Each monster that reaches the goal takes one, from the end of the row; when the last
+one goes, the level is lost.
+
+A level with no hearts placed cannot be lost — monsters that get through simply
+leave. That is a fine way to build a practice map, and it means an unfinished level
+never shows a skull by accident.
+
+**What a monster is worth** lives on its prefab, like its speed and health — a
+Runner drops 5 gold, a Brute 20:
+
+```json
+"bounty": { "gold": 5 }
+```
+
+There is nothing to spend gold on yet, so for now the coins simply lie where they
+were earned — but each one remembers its worth, ready for the day towers are bought
+mid-level.
+
+---
+
 ## Placing a tower
 
 1. Click **`prefabs/tower-archer.json`** in the Assets panel.
@@ -287,12 +318,15 @@ is the checklist:
 
 ## What this game cannot do yet
 
-- **Gold and lives.** Towers shoot, monsters die and waves come when called, and
-  none of it costs or earns anything yet. Gold and lives are next, which is when
-  the game becomes winnable and losable.
+- **Spend gold.** Coins drop and lie there; nothing buys, upgrades or sells a
+  tower yet. Building during play — the real game loop, where the coins on the
+  ground are your budget — is the next big piece, and it needs the mouse to
+  reach the game the way the spacebar now does.
 - **A Call Wave button on screen.** The spacebar is the button. Nothing on the
   screen says so, counts the waves, or shows how many are left — the picture is
   the only report.
+- **Speed controls.** No pause, no fast-forward. The design calls them
+  load-bearing, and they are not here yet.
 - **Build a tower during play.** Towers are placed in the editor before Play is
   pressed. Buying them mid-level with gold is the game's real loop and it is not
   here yet.

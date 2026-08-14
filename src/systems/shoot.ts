@@ -39,11 +39,11 @@ import { distanceAlongNearest, routeThrough } from './route'
  * for. On a level with no road (every way that can happen is listed in
  * `route.ts`), towers still defend themselves: nearest monster instead.
  *
- * **A monster that dies is removed from the level, arrows and all.** Anything
- * still flying at it fades with it rather than striking a corpse; anything
- * spent on it is task-3 business (bounty), not combat's. A monster standing on
- * the goal is still a monster — it keeps its health and towers keep shooting
- * it, until leaks cost lives and remove it (also task 3).
+ * **A monster that dies is removed from the level, arrows and all, and its
+ * bounty hits the ground where it fell.** Anything still flying at it fades
+ * with it rather than striking a corpse. A monster that *arrives* is `leak`'s
+ * to remove — running after this system, so the last arrow of the step still
+ * lands — and drops nothing: gold is for kills, a leak only costs.
  */
 export const shootSystem: System = {
   id: 'shoot',
@@ -80,6 +80,7 @@ const cooldowns = new WeakMap<Entity, number>()
 
 function land(entities: Entity[], dtSeconds: number): void {
   const fallen: Entity[] = []
+  const dropped: Entity[] = []
 
   for (const arrow of entities) {
     const flight = flights.get(arrow)
@@ -100,7 +101,15 @@ function land(entities: Entity[], dtSeconds: number): void {
     if (gap <= step) {
       wounds.set(flight.target, woundsOf(flight.target) + flight.damage)
       fallen.push(arrow)
-      if (isDead(flight.target)) fallen.push(flight.target)
+      if (isDead(flight.target)) {
+        fallen.push(flight.target)
+        // "Monsters that die drop gold" — literally. The coin lies where the
+        // monster fell, carrying the bounty its type authored, and spending
+        // it is somebody else's business on a later day. A monster with no
+        // well-formed bounty drops nothing (game-code T3).
+        const coin = coinFor(flight.target)
+        if (coin !== null) dropped.push(coin)
+      }
       continue
     }
 
@@ -112,7 +121,39 @@ function land(entities: Entity[], dtSeconds: number): void {
   }
 
   remove(entities, fallen)
+  entities.push(...dropped)
 }
+
+/**
+ * The coin a monster drops, or null when its type authored no bounty.
+ *
+ * The coin's art is named inside the monster's own `bounty` component — the
+ * `texture` field rule again (T9), so the kernel loaded it with the level. The
+ * `coin` component carries the amount for the day something spends it; today a
+ * level's wealth is simply the coins lying on it.
+ */
+function coinFor(monster: Entity): Entity | null {
+  const component: unknown = monster.components['bounty']
+  if (typeof component !== 'object' || component === null) return null
+
+  const { gold, texture } = component as Record<string, unknown>
+  if (!isRate(gold)) return null
+  if (typeof texture !== 'object' || texture === null) return null
+  const { id, path } = texture as Record<string, unknown>
+  if (typeof id !== 'string' || typeof path !== 'string') return null
+
+  return {
+    id: `coin#${(minted += 1)}`,
+    name: 'Coin',
+    transform: { ...monster.transform, rotation: 0, scaleX: 1, scaleY: 1 },
+    components: {
+      sprite: { texture: { id, path } },
+      coin: { gold },
+    },
+  }
+}
+
+let minted = 0
 
 // --- towers firing ----------------------------------------------------------
 

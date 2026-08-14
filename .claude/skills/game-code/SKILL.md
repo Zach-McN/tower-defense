@@ -29,6 +29,11 @@ The vocabulary now, all of it justified by a noun in `docs/GENRE-SPEC.md`:
 "components": { "tower": { "rangeUnits": 48, "damage": 1, "shotsPerSecond": 1,
                            "projectile": { "texture": { "id": "…", "path": "…" }, "unitsPerSecond": 160 } } }
 "components": { "waveBreak": {} }
+"components": { "life": {} }
+"components": { "bounty": { "gold": 5, "texture": { "id": "…", "path": "…" } } }
+"components": { "coin": { "gold": 5 } }            // run-only, on dropped coins
+"components": { "verdict": { "won": true } }       // run-only, on the banner
+"components": { "outcome": { "victory": { "texture": { … } }, "defeat": { "texture": { … } } } }
 ```
 
 `spawn` and `goal` are components with nothing in them, which is worth stating
@@ -263,6 +268,36 @@ data on an entity the runner injects, so a test presses a key by putting
 `inputEntity(['Space'])` in its fixture list. This game is the consumer that
 input seam was shaped by. _[earned 2026-08-14]_
 
+### T11: Lives are drawn, gold is dropped, and the verdict is an entity — the run's whole ledger is the picture
+
+The spec's closing nouns went the same way as the wave list, because the same
+question kept answering: **a life is a heart token placed by the author**
+(`prefabs/life.json` — sprite plus empty `life` marker, T7's shape a third
+time), how many stand is the count, and `leak` removes one per monster that
+reaches the goal, hindmost first. **A bounty is a coin entity dropped where the
+monster died** — its art named inside the monster's `bounty` component (T9
+again), its amount carried in a run-only `coin` component for the day building
+spends it; until then a level's wealth is literally the coins lying on it.
+**Win and lose are a banner** `verdict` spawns at the outcome-carrier's
+transform (the Ground, so the board's centre), wearing art the Ground prefab
+names under `outcome`, and carrying `verdict: { won }` — which `waves` reads
+to refuse calls on a decided level, and tests read to assert the ending.
+Entities are the bus between systems, exactly as input arrived.
+
+Two authored-content rules fell out and both are load-bearing:
+
+1. **A level that authors no waves cannot be won, and one that places no hearts
+   cannot be lost.** Both verdicts require the level to have opened with the
+   thing being run out of — counts `verdict` captures on its first step, which
+   (running last) is after `waves` confiscated the queue. A road with
+   hand-placed monsters is a sandbox, and a sandbox never shows a banner.
+2. **`leak` removes an arrived monster**, ending the scaffolding-era behaviour
+   of towers shooting something that already finished. Kills drop gold; leaks
+   only cost.
+
+Order in `index.ts` is now five long and each adjacency is argued there:
+waves, march, shoot, leak, verdict. _[earned 2026-08-14]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -337,7 +372,12 @@ _[earned 2026-08-13]_
 - `src/systems/shoot.ts` — combat whole: the `tower` and `health` components,
   arrows, wounds, cooldowns, targeting and death (T8, T9).
 - `src/systems/waves.ts` — the drawn queue: the `waveBreak` component, what is
-  confiscated and when, and the spacebar as Call Wave (T10).
+  confiscated and when, the spacebar as Call Wave, and `wavesWaiting`, the one
+  window into the confiscated queue (T10).
+- `src/systems/leak.ts` — the `life` component, what counts as arriving, and
+  which heart a leak takes (T11).
+- `src/systems/verdict.ts` — the `outcome` and `verdict` components, what each
+  ending requires the level to have authored, and the banner (T11).
 - `src/systems/route.ts` — what a drawn road *is*: the `grid`, `tile`, `spawn` and
   `goal` components, how the order is derived from them, every way a level can
   fail to describe a road — and the once-per-run road cache (`routeThrough`),
@@ -352,6 +392,9 @@ _[earned 2026-08-13]_
   and speed inside its `tower` component (T8, T9).
 - `prefabs/wave-break.json` — the banner that splits the drawn queue into waves
   (T10).
+- `prefabs/life.json` — a heart: one life, counted by placement (T11).
+- `prefabs/ground.json` — the backdrop, the grid (TG3), and now the `outcome`
+  art the verdict banner wears (T11).
 - `prefabs/road-tile.json`, `prefabs/road-spawn.json`, `prefabs/road-goal.json` —
   the three kinds of road tile, and therefore the two ends (T7). All three carry
   `tile: { kind: "path" }`; the two ends add an empty `spawn` or `goal`.
