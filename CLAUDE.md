@@ -4,7 +4,8 @@ This folder is a **game**, not an application. The application is `kernel-2d`, t
 up; this is a document it opens. Nothing here is an engine, a dependency or a build — it is
 the game as text, plus the game's own code.
 
-Open it with, from `kernel-2d/`:
+The human opens it by double-clicking `Open editor.cmd` in this folder. The same
+thing, from `kernel-2d/`, which is what a session uses:
 
 ```bash
 npm run editor -- ../games/tower-defense
@@ -30,6 +31,7 @@ is listed there is not a gap, and finding it absent is not a reason to add it.
 | `src/` — components and systems | AI |
 | `assets/`, `scenes/`, `prefabs/`, `data/` | The human |
 | `project.json` | Either; it is written by the editor |
+| `Open editor.cmd` | Neither; the kernel generates it. Regenerate, never edit |
 | `docs/GENRE-SPEC.md` | The human |
 
 AI may author content in the human's folders — including generated art — under the marking
@@ -53,8 +55,12 @@ Code here names the kernel by a package, never by a path:
 import type { Entity, System } from 'kernel-2d/runtime'
 ```
 
-`tsconfig.json` is the one file in this folder that says where the kernel actually sits. If
-this folder moves, that line changes and nothing under `src/` does.
+`tsconfig.json` is the one file in this folder that a session maintains saying where the
+kernel actually sits. If this folder moves, that line changes and nothing under `src/` does.
+
+`Open editor.cmd` says it too, for `cmd.exe` rather than for the typechecker, and is not
+maintained by hand: the kernel writes it (`npm run launcher -- ../games/tower-defense`) and
+rewriting it after a move is that command, not an edit.
 
 **Typecheck it** — nothing else does, since the editor and the export only transpile:
 

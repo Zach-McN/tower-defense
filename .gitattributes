@@ -1,6 +1,10 @@
 # Normalize all text files to LF in the repo and working tree
 * text=auto eol=lf
 
+# Except the launcher: cmd.exe is its only reader and is the one reader still
+# entitled to care about carriage returns.
+*.cmd text eol=crlf
+
 # Binary assets — never normalized
 *.png binary
 *.jpg binary

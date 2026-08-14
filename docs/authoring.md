@@ -7,13 +7,18 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **the two ends of a road are tiles you place** (2026-08-13).
+Last true as of: **this folder opens by double-clicking it** (2026-08-13).
 
 ---
 
 ## Opening it
 
-From the `kernel-2d` folder:
+**Double-click `Open editor.cmd`**, in this folder. A black window appears and the
+editor opens in your browser a few seconds later; that window is the editor running,
+so leave it be and close it when you are finished.
+
+The same thing typed out, from the `kernel-2d` folder, if you would rather have a
+terminal:
 
 ```bash
 npm run editor -- ../games/tower-defense
