@@ -151,17 +151,30 @@ _[earned 2026-08-13]_
 
 ### TG2: How far out of line a tile may sit is bounded by arithmetic, not by taste
 
-Neighbours are decided by distance, with room in it, because the editor has no grid
-snap and a road is drawn by dragging. The tolerance is a third of a tile, and the
-ceiling is not a preference: **a diagonal neighbour sits √2 tiles away, which is
-0.414 of a tile further than a square one.** Any tolerance at or above that starts
-joining tiles that touch only at a corner, and a road quietly acquires shortcuts
-nobody drew.
+Neighbours are decided by distance, with room in it. The tolerance is a third of a
+tile, and the ceiling is not a preference: **a diagonal neighbour sits √2 tiles
+away, which is 0.414 of a tile further than a square one.** Any tolerance at or
+above that starts joining tiles that touch only at a corner, and a road quietly
+acquires shortcuts nobody drew.
 
 The obvious-looking value is half a tile. It is above the ceiling, and what it breaks
 is invisible: every level whose road never passes diagonally beside itself keeps
 working, so the first level that does would be the one that mysteriously walks
-through a wall. _[earned 2026-08-13]_
+through a wall.
+
+**The reason it exists has changed, and the number has not — which is the part
+worth recording.** It was written because the editor had no grid snap, and the
+editor gained one the next day: set to `16 from 8`, every tile a click puts down is
+exactly one tile from its neighbour and the tolerance is never consulted. It stays
+anyway, and not out of caution — the snap is *window* state that starts at whole
+units every time the editor opens (`editor-ui` U31), so a road drawn by somebody
+who did not set it is a road drawn on whole units, and refusing it would be the
+tool declining to read what it just helped write.
+
+The general shape: **a tolerance that exists to forgive a missing tool is not
+retired by the tool arriving**, because the tool is optional and the content it
+forgave is already on disk. What retires it is the sloppy input becoming
+unreachable. _[earned 2026-08-13, reason superseded 2026-08-13]_
 
 ### TG3: The entity that carries the grid is the backdrop, so deleting the backdrop stops the road working
 

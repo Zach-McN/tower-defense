@@ -51,10 +51,12 @@ export interface Route {
  * How far out of line a tile may sit and still count as next door, as a fraction
  * of a tile.
  *
- * It exists because the editor has no grid snap yet: a road is drawn by dragging
- * tiles, a drag lands on whole scene units, and a tile a couple of units off ought
- * to be a road rather than a puzzle. So neighbours are decided by distance with
- * room in it.
+ * It was written when the editor had no grid snap: a road was drawn by dragging
+ * tiles, a drag landed on whole scene units, and a tile a couple of units off ought
+ * to be a road rather than a puzzle. **The editor gained a settable snap on
+ * 2026-08-13 and this stays** — for roads drawn before it, for a tile moved with
+ * Alt held, and because the snap starts at whole units every time the editor is
+ * opened. A road drawn without setting it is still a road somebody meant.
  *
  * **The ceiling is not a matter of taste.** A diagonal neighbour sits √2 tiles
  * away, which is 0.414 of a tile further than a square one — so any tolerance at
