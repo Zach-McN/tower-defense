@@ -1,0 +1,20 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "d08ad497c1ce6822",
+  "name": "Spawn",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "d27178773c7ffe4f",
+        "path": "assets/textures/tiles/path-spawn.png"
+      }
+    },
+    "tile": {
+      "kind": "path"
+    },
+    "spawn": {}
+  },
+  "generatedBy": "claude-opus-5",
+  "generatedAt": "2026-08-13"
+}

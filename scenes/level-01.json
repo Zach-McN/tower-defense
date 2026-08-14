@@ -23,7 +23,7 @@
     },
     {
       "id": "39304b7067fcb689",
-      "name": "Road 1",
+      "name": "Spawn",
       "transform": {
         "x": 8,
         "y": 40,
@@ -34,11 +34,10 @@
       "components": {
         "prefab": {
           "source": {
-            "id": "4389a08e112124dd",
-            "path": "prefabs/road-tile.json"
+            "id": "d08ad497c1ce6822",
+            "path": "prefabs/road-spawn.json"
           }
-        },
-        "spawn": {}
+        }
       }
     },
     {
@@ -499,7 +498,7 @@
     },
     {
       "id": "168eebc18445b129",
-      "name": "Road 26",
+      "name": "Goal",
       "transform": {
         "x": 312,
         "y": 136,
@@ -510,11 +509,10 @@
       "components": {
         "prefab": {
           "source": {
-            "id": "4389a08e112124dd",
-            "path": "prefabs/road-tile.json"
+            "id": "e9ec07f1bdc6493e",
+            "path": "prefabs/road-goal.json"
           }
-        },
-        "goal": {}
+        }
       }
     },
     {

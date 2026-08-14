@@ -38,7 +38,15 @@ acquiring a genre's vocabulary, and the rule is that it grows by extraction once
 *second* game wants the same primitive (`genre-spinup` S1). Wanting a nicer editing
 experience is not that. **T5 is what that pressure turned out to be worth**: it
 mostly went away once speed belonged to a monster type rather than to a placement.
-_[earned 2026-08-13, extended 2026-08-13]_
+
+**Every one of those four components now reaches a level through a prefab**, and
+none of them is typed into a scene file any more — `grid` rides on the Ground
+prefab (TG3), `speed` on a monster type (T5), and `tile`, `spawn` and `goal` on the
+three road prefabs (T7). The vocabulary above is what a *system* reads after the
+kernel has resolved an instance against what it was placed from; where it was
+written is a separate question, and the answer to it has turned out to be "a
+prefab" three times running. _[earned 2026-08-13, extended 2026-08-13, extended
+2026-08-13]_
 
 ### T2: `march` reads the road the level draws, and it is the same system that used to move along x
 
@@ -130,6 +138,60 @@ safe because the spec says the road *"does not change, ever, during play or
 otherwise"* — a cache justified by the game's own rules rather than by hoping.
 _[earned 2026-08-13]_
 
+### T7: An end of the road is a *kind of tile*, so it is a prefab — and that is the whole answer to marking one
+
+Marking a spawn and a goal was the last thing about this game that was **impossible**
+rather than merely slow: two lines typed into a level file per level, because the
+Inspector names `spawn` and offers no control for it and T1/T5 forbid teaching the
+kernel this game's words. It is the case `genre-spinup`'s parked question was
+waiting for — the first genre tool that cannot be done with the kernel's existing
+gestures — and it turned out not to be one.
+
+**The spec settles it before any editor question arises.** Spawn is *"the tile where
+monsters come in"*. A tile. And a *kind* of tile is a prefab, exactly as a kind of
+monster is (T5). So there are three road prefabs rather than one:
+
+```
+prefabs/road-tile.json    tile: { kind: "path" }
+prefabs/road-spawn.json   tile: { kind: "path" }, spawn: {}
+prefabs/road-goal.json    tile: { kind: "path" }, goal: {}
+```
+
+Placing one **is** marking one. Nothing in `src/` changed, no component was invented,
+the kernel gained nothing and the level format gained nothing: the whole feature is
+four content files, written by a throwaway generator through the kernel's own schemas
+(`genre-spinup` S6). **A session that answers a parked architecture question by
+committing no code is the outcome to expect from S1, not a suspicious one.**
+
+**Why it works at all is worth knowing, because it is the load-bearing kernel
+behaviour this game leans on twice.** A placed entity holds a reference and the
+loader merges the prefab's components onto it, with anything the entity carries
+itself winning per component. A system is handed that resolved list — so `route.ts`
+reads `spawn` without ever knowing whether it was typed into the level or inherited
+from what the tile was placed from. That is the same road `speed` already travelled.
+
+**What it costs, weighed before it was built rather than discovered after:**
+
+1. **Converting a tile is delete-and-place**, because nothing swaps one prefab for
+   another in place. Cheap with the snap set: the replacement lands in the same
+   square.
+2. **Nothing stops two spawns**, and this makes that *easier* to do by accident than
+   the text editor ever was — one press of Place by clicking and every click lays
+   another one. Refused in silence, per TG1.
+3. **Two more textures**, which is the cost that pays for itself: the ends of the
+   road are now visible on the map, which a mark inside a file never was.
+
+**The general shape, and the thing to reach for before asking for an authoring
+surface: ask what the thing *is* before asking what would edit it.** A mark that says
+which *kind* of thing this is, is content — and content in this kernel is a prefab.
+The question only becomes real for something that must differ *per placement*, which
+a prefab cannot express.
+
+**The named trigger, therefore:** a marker that has to carry a value of its own —
+this spawn's wave list, this goal's life cost. A prefab cannot vary per instance, so
+that is the day `genre-spinup`'s parked question is genuinely asked rather than
+dodged. Two dodges in a row is a good record and not a proof. _[earned 2026-08-13]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -147,7 +209,14 @@ wanting to report.
 
 **What to do meanwhile:** when a level will not walk, the first check is the level and
 not the code — one grid entity, one `spawn`, one `goal`, and no gap in the tiles.
-_[earned 2026-08-13]_
+
+**One of those cases got likelier the day the ends became prefabs (T7).** Two spawns
+used to require typing `"spawn": {}` twice into a file; now it is one press of Place
+by clicking with the spawn tile selected, and eight of them look exactly like eight
+road tiles. The silence is unchanged and the road to it is shorter — which is the
+kind of thing that decides *when* the reporting channel is worth building, without
+changing the argument about where it belongs. _[earned 2026-08-13, extended
+2026-08-13]_
 
 ### TG2: How far out of line a tile may sit is bounded by arithmetic, not by taste
 
@@ -202,8 +271,11 @@ _[earned 2026-08-13]_
   JSON would be testing the kernel's loader on the way past.
 - `prefabs/monster-runner.json`, `prefabs/monster-brute.json` — the monster types,
   and therefore the speeds (T5).
-- `prefabs/road-tile.json`, `prefabs/ground.json` — what placing a tile places. The
-  ground prefab is what carries `grid` into a level (TG3).
+- `prefabs/road-tile.json`, `prefabs/road-spawn.json`, `prefabs/road-goal.json` —
+  the three kinds of road tile, and therefore the two ends (T7). All three carry
+  `tile: { kind: "path" }`; the two ends add an empty `spawn` or `goal`.
+- `prefabs/ground.json` — what placing a backdrop places. It is what carries `grid`
+  into a level (TG3).
 - `scenes/level-01.json` — the first level. Generated scaffolding, marked as such,
   meant to be replaced.
 - `docs/authoring.md` — the human's page: how to draw a road and place a monster with

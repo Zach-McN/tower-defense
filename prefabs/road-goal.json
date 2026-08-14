@@ -1,0 +1,20 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "e9ec07f1bdc6493e",
+  "name": "Goal",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "466ce1cbece382a8",
+        "path": "assets/textures/tiles/path-goal.png"
+      }
+    },
+    "tile": {
+      "kind": "path"
+    },
+    "goal": {}
+  },
+  "generatedBy": "claude-opus-5",
+  "generatedAt": "2026-08-13"
+}

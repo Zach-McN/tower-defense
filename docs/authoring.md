@@ -7,7 +7,7 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **a road is clicked out, not dragged** (2026-08-13).
+Last true as of: **the two ends of a road are tiles you place** (2026-08-13).
 
 ---
 
@@ -59,6 +59,9 @@ Then:
 3. Click your way along the road. Each click drops a tile.
 4. Press **Esc** when the road is done.
 
+Then mark the two ends — they are tiles of their own, and *The two ends* below says
+how.
+
 Clicking on top of the green field is fine — while you are placing, a click puts a
 tile down rather than picking up whatever is underneath.
 
@@ -72,27 +75,35 @@ There is still room for error — about five units — so a tile nudged out of l
 hand is still part of the road. With the snap set you will not need it, and it is
 what keeps roads drawn before the snap existed working.
 
-### Marking the two ends
+### The two ends
 
-This is the one thing that cannot be done with a tool yet, and it is two lines in a
-text editor per level.
+**The ends of a road are their own tiles.** There are three road prefabs, not one:
 
-Open the level file and find the first and last road tiles. Add to the first one:
+| Place this | For |
+|---|---|
+| `prefabs/road-spawn.json` | The first tile. A dark mouth — where monsters come in. |
+| `prefabs/road-tile.json` | Every tile in between. |
+| `prefabs/road-goal.json` | The last tile. A gold marker — what they are walking toward. |
 
-```json
-"spawn": {}
-```
+All three are road, so all three are walked. You can see which end is which by
+looking at the map, and no level file has to be opened to say so.
 
-and to the last one:
+So a road is: place the spawn tile, place the ordinary tiles along it, place the goal
+tile at the far end. Each of the three is placed the same way — click the prefab in
+the Assets panel, then **Place**, or **Place by clicking** for the long middle
+stretch. The mode places whichever prefab it was switched on for, so changing tile
+means Esc, click the other prefab, and press it again.
 
-```json
-"goal": {}
-```
+**Exactly one spawn and one goal per level.** Two of either and nothing walks — see
+*When nothing walks*. The trap worth knowing: **Place by clicking** left on while the
+spawn tile is selected puts down another spawn on every click, and eight dark mouths
+in a row look exactly as deliberate as one. Nothing says the level is broken; it just
+does not walk. Place the two ends one at a time.
 
-alongside the `"prefab"` line already there. That is all a spawn and a goal are: a
-mark saying which end is which. Monsters walk from the spawn toward the goal.
-
-The editor picks the change up straight away — no restart, no reload.
+**To change an end, delete the tile and place the other kind.** There is no way to
+turn a road tile into a spawn tile where it stands; click it, press Delete in the
+Hierarchy, and place the one you wanted. It lands in the same square if the snap is
+still `16 from 8`.
 
 ### One Ground per level
 
@@ -157,7 +168,9 @@ is no message anywhere — a level's own code has no way to put one on screen �
 is the checklist:
 
 - **Is there exactly one Ground?** Not none, not two.
-- **Is there a `"spawn": {}` and a `"goal": {}`**, one each, on road tiles?
+- **Is there one spawn tile and one goal tile?** One each, not none and not two. The
+  Hierarchy names them *Spawn* and *Goal*, so counting them is quicker there than on
+  the map.
 - **Is there a gap?** Two road tiles more than about 21 units apart are not connected.
 - **Does the road fork?** A stray road tile beside the middle of the road gives it two
   ways to go, and it refuses rather than guessing. That includes a road running
@@ -176,9 +189,12 @@ is the checklist:
   up to, so a half-finished road is the only picture of where the squares are.
 - **Remember the snap.** Set it to `16 from 8` each time you open the editor — it goes
   back to `1 from 0` on every reload.
-- **Mark a spawn or a goal by clicking.** Text editor, two lines per level.
+- **Turn a road tile into a spawn or a goal where it stands.** Delete it and place the
+  other kind; nothing swaps one prefab for another in place.
 - **Edit a speed, or any of this game's own settings, in the Inspector.** They are
   named there and cannot be changed there.
-- **Say why a road is broken.** See above.
+- **Say why a road is broken** — including the easiest one to do by accident, two
+  spawn tiles. Nothing is reported; the level simply does not walk. See *When nothing
+  walks*.
 - **Buildable and scenery tiles.** The design has three kinds of tile; only `path`
   exists, because nothing reads the other two until there are towers to put on them.
