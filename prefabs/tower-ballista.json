@@ -1,0 +1,35 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "2f8cbc41f5b50773",
+  "name": "Ballista",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "36836de460943b13",
+        "path": "assets/textures/towers/ballista.png"
+      }
+    },
+    "price": {
+      "gold": 40
+    },
+    "tower": {
+      "rangeUnits": 90,
+      "damage": 1,
+      "shotsPerSecond": 0.5,
+      "projectile": {
+        "texture": {
+          "id": "3b46ab41c25e5b6a",
+          "path": "assets/textures/projectiles/spear.png"
+        },
+        "unitsPerSecond": 220
+      }
+    },
+    "tiers": [
+      { "price": { "gold": 25 }, "tower": { "damage": 2 } },
+      { "price": { "gold": 40 }, "tower": { "shotsPerSecond": 0.75, "rangeUnits": 100 } }
+    ]
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}

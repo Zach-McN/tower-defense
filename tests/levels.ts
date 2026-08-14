@@ -133,6 +133,26 @@ export function frost(
 }
 
 /** One buildable pad — the spec's third tile kind, where a tower may go. */
+/** A long-range tower, as the ballista prefab authors one. */
+export function ballista(
+  at: { x: number; y: number },
+  overrides: Partial<{ rangeUnits: number; price: number; name: string }> = {},
+): Entity {
+  return entity(overrides.name ?? 'Ballista', at.x, at.y, {
+    sprite: { texture: { id: 'ballista-texture', path: 'assets/textures/towers/ballista.png' } },
+    price: { gold: overrides.price ?? 40 },
+    tower: {
+      rangeUnits: overrides.rangeUnits ?? 90,
+      damage: 1,
+      shotsPerSecond: 0.5,
+      projectile: {
+        texture: { id: 'spear-texture', path: 'assets/textures/projectiles/spear.png' },
+        unitsPerSecond: 220,
+      },
+    },
+  })
+}
+
 export function pad(at: { x: number; y: number }, name = 'Pad'): Entity {
   return entity(name, at.x, at.y, { tile: { kind: 'buildable' } })
 }

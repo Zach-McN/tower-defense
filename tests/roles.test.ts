@@ -5,7 +5,7 @@ import { inputEntity, type Entity } from 'kernel-2d/runtime'
 import { buildSystem } from '../src/systems/build'
 import { marchSystem } from '../src/systems/march'
 import { shootSystem } from '../src/systems/shoot'
-import { archer, centre, coin, frost, grid, mage, monster, pad, road } from './levels'
+import { archer, ballista, centre, coin, frost, grid, mage, monster, pad, road } from './levels'
 
 /**
  * The splash and slow roles, and choosing between wares — the spec's answer to
@@ -94,6 +94,33 @@ describe('the slow role', () => {
     for (let count = 0; count < 8; count += 1) shootSystem.step(entities, STEP)
 
     expect(entities.filter((one) => one.name === 'Arrow')).toHaveLength(0)
+  })
+})
+
+describe('the long-range role', () => {
+  it('covers road no other tower can reach', () => {
+    // Five tiles and a bit away: well inside the ballista's ninety units,
+    // far beyond the archer's forty-eight.
+    const distant = monster(centre(7, 2), 56, 1, 'Distant')
+    const entities = [...straightRoad(), ballista(centre(2, 4)), distant]
+
+    for (let count = 0; count < 8; count += 1) shootSystem.step(entities, STEP)
+
+    expect(entities).not.toContain(distant)
+  })
+
+  it('pays for the reach in rate of fire: the second spear is two seconds behind', () => {
+    const tough = monster(centre(7, 2), 56, 2, 'Tough')
+    const entities = [...straightRoad(), ballista(centre(2, 4)), tough]
+
+    // One second in, only the opening spear has landed: a two-hit monster
+    // stands. An archer at this rate would have loosed twice already.
+    for (let count = 0; count < 4; count += 1) shootSystem.step(entities, STEP)
+    expect(entities).toContain(tough)
+
+    // Three seconds more buys the second spear, and the monster falls.
+    for (let count = 0; count < 12; count += 1) shootSystem.step(entities, STEP)
+    expect(entities).not.toContain(tough)
   })
 })
 
