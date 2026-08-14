@@ -24,6 +24,12 @@ terminal:
 npm run editor -- ../games/tower-defense
 ```
 
+**If you ever move this folder, or move the `kernel-2d` folder, ask Claude to refresh
+this launcher.** It remembers where the editor was, so moving either one leaves it
+pointing at the wrong place. Double-clicking it then says exactly that and waits —
+nothing is lost, and a session puts it right in one command. Moving the whole
+`gamedev` folder as one piece is fine and needs nothing.
+
 It opens on `scenes/level-01.json` — a green field, a brown road with two corners,
 and one monster standing at the left-hand end of the road.
 
