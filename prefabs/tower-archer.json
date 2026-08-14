@@ -1,0 +1,28 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "2803339dcb617c4e",
+  "name": "Archer post",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "d851c1eb548bc0d3",
+        "path": "assets/textures/towers/archer.png"
+      }
+    },
+    "tower": {
+      "rangeUnits": 48,
+      "damage": 1,
+      "shotsPerSecond": 1,
+      "projectile": {
+        "texture": {
+          "id": "96e99e8b12e59847",
+          "path": "assets/textures/projectiles/arrow.png"
+        },
+        "unitsPerSecond": 160
+      }
+    }
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}

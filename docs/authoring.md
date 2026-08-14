@@ -7,7 +7,7 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **this folder opens by double-clicking it** (2026-08-13).
+Last true as of: **towers shoot the monsters that walk past** (2026-08-14).
 
 ---
 
@@ -31,7 +31,8 @@ nothing is lost, and a session puts it right in one command. Moving the whole
 `gamedev` folder as one piece is fine and needs nothing.
 
 It opens on `scenes/level-01.json` — a green field, a brown road with two corners,
-and one monster standing at the left-hand end of the road.
+one monster standing at the left-hand end of the road, and two archer posts standing
+at the road's bends.
 
 **All of that is generated scaffolding and it is meant to be replaced.** Every file
 in it says so inside itself: art, level, prefabs, the lot. Replace any piece whenever
@@ -41,13 +42,16 @@ you have something better; nothing depends on it being what it is.
 
 ## Press Play
 
-The monster walks the road, turns both corners, reaches the far end and stops.
+The monster walks the road — and as it comes past the first bend, the archer post
+there shoots it. Arrows fly, three of them land, and the monster is gone.
 
-It stops because there is nothing yet for reaching the end to *mean* — a monster
-getting through is supposed to cost you a life, and lives do not exist yet. So it
-stands on the last tile.
+A monster that gets past every tower walks to the far end and stops. It stops because
+there is nothing yet for reaching the end to *mean* — getting through is supposed to
+cost you a life, and lives do not exist yet. So it stands on the last tile, and the
+towers in reach keep shooting it where it stands until it is dead. That will change
+when lives arrive.
 
-Press Stop and it is back at the start.
+Press Stop and everything is back where it started, arrows and all.
 
 ---
 
@@ -170,6 +174,56 @@ for it.
 **To add a monster type**, copy one of the two prefab files, give it a new name and a
 new speed. Nothing has to be told about it.
 
+### Setting its toughness
+
+Health works exactly like speed: **it belongs to the type**, a Runner takes three
+hits and a Brute takes ten, and changing what a type can take means opening its
+prefab file in a text editor:
+
+```json
+"health": { "total": 3 }
+```
+
+Hits, not points — every archer arrow takes one off, so a Runner survives two arrows
+and falls to the third.
+
+---
+
+## Placing a tower
+
+1. Click **`prefabs/tower-archer.json`** in the Assets panel.
+2. Press **Place**, and drag it onto the grass beside the road.
+3. Press Play, and it shoots whatever walks into reach.
+
+The snap set to `16 from 8` lands it neatly on a square, same as a road tile. It does
+not have to be on the grid — anywhere on the grass works — but it must not be *on*
+the road: nothing stops you putting it there yet, and a tower standing in the road
+looks wrong even though the monsters walk straight through it.
+
+**Where you put it is the whole game.** A post beside a bend covers two stretches of
+road at once; a post beside the middle of a straight covers that straight and nothing
+else. The archer post reaches three tiles in every direction.
+
+An archer post shoots one arrow a second at the monster in reach that is furthest
+along the road, and every arrow takes one hit off. Those numbers live in
+`prefabs/tower-archer.json`, in a text editor, the same way a monster's speed does:
+
+```json
+"tower": {
+  "rangeUnits": 48,
+  "damage": 1,
+  "shotsPerSecond": 1
+}
+```
+
+Range is in units — 48 is three tiles. The `projectile` part next to those numbers
+says what an arrow looks like and how fast it flies; swap its texture to re-fletch
+every arrow this kind of tower shoots.
+
+**During play you are a spectator.** Placing a tower is editing the level, and it
+happens before Play is pressed — buying towers mid-level with gold is coming, but it
+is not here yet.
+
 ---
 
 ## When nothing walks
@@ -192,8 +246,17 @@ is the checklist:
 
 ## What this game cannot do yet
 
-- **Towers, gold, waves, lives.** None of it. Monsters walk and that is the whole game
-  so far.
+- **Gold, waves, lives.** Towers shoot, monsters die, and none of it costs or earns
+  anything yet. Waves and the call-wave button are next; then gold and lives, which
+  is when the game becomes winnable and losable.
+- **Build a tower during play.** Towers are placed in the editor before Play is
+  pressed. Buying them mid-level with gold is the game's real loop and it is not
+  here yet.
+- **Upgrade or sell a tower.** One kind of tower, one tier.
+- **See a tower's range before Play.** Nothing draws the circle; three tiles from
+  the post, counted by eye.
+- **Keep a tower off the road.** Nothing refuses a tower placed on a road tile;
+  monsters walk through it.
 - **Paint a road by dragging along it.** One click per tile. Clicking is quick enough
   that dragging a stroke has not been worth building.
 - **See the grid.** The snap lines the tiles up; nothing draws the lines it lined them
@@ -208,4 +271,6 @@ is the checklist:
   spawn tiles. Nothing is reported; the level simply does not walk. See *When nothing
   walks*.
 - **Buildable and scenery tiles.** The design has three kinds of tile; only `path`
-  exists, because nothing reads the other two until there are towers to put on them.
+  exists. A tower can be put anywhere the grass is, because nothing yet says which
+  squares are buildable — that distinction starts mattering when towers are bought
+  during play rather than placed in the editor.

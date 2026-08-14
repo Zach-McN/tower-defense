@@ -12,6 +12,9 @@
     },
     "speed": {
       "unitsPerSecond": 24
+    },
+    "health": {
+      "total": 10
     }
   },
   "generatedBy": "claude-opus-5",

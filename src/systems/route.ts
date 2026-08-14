@@ -93,6 +93,31 @@ export function routeIn(entities: readonly Entity[]): Route | null {
 }
 
 /**
+ * The road, worked out once per run rather than once per system per step.
+ *
+ * Moved here from `march` the day a second system needed the same road: what a
+ * road *is* includes how often it is worth deriving, and two private caches
+ * would be two chances for the answer to differ mid-step.
+ *
+ * **The spec is what makes the cache safe:** *"[the path] does not change,
+ * ever, during play or otherwise."* Keyed on the entity list, which the engine
+ * makes once when a level starts and holds for as long as it runs — so a level
+ * that is stopped and played again derives its road again, and an edit made in
+ * between is picked up. Systems adding and removing entities during a run do
+ * not disturb it, because the list object itself is what the key is.
+ */
+const roads = new WeakMap<readonly Entity[], Route | null>()
+
+export function routeThrough(entities: readonly Entity[]): Route | null {
+  const known = roads.get(entities)
+  if (known !== undefined) return known
+
+  const found = routeIn(entities)
+  roads.set(entities, found)
+  return found
+}
+
+/**
  * Where a walker that has come this far along the road stands.
  *
  * Distances outside the road are clamped rather than refused: before the start is

@@ -516,6 +516,44 @@
       }
     },
     {
+      "id": "b52e9d04a7c31f18",
+      "name": "Archer post",
+      "transform": {
+        "x": 120,
+        "y": 56,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2803339dcb617c4e",
+            "path": "prefabs/tower-archer.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "5b9e2d7c4a1f8360",
+      "name": "Archer post 2",
+      "transform": {
+        "x": 152,
+        "y": 120,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "2803339dcb617c4e",
+            "path": "prefabs/tower-archer.json"
+          }
+        }
+      }
+    },
+    {
       "id": "33832772472edabb",
       "name": "Runner",
       "transform": {

@@ -25,6 +25,9 @@ The vocabulary now, all of it justified by a noun in `docs/GENRE-SPEC.md`:
 "components": { "tile": { "kind": "path" }, "spawn": {} }
 "components": { "tile": { "kind": "path" }, "goal": {} }
 "components": { "speed": { "unitsPerSecond": 56 } }
+"components": { "health": { "total": 3 } }
+"components": { "tower": { "rangeUnits": 48, "damage": 1, "shotsPerSecond": 1,
+                           "projectile": { "texture": { "id": "…", "path": "…" }, "unitsPerSecond": 160 } } }
 ```
 
 `spawn` and `goal` are components with nothing in them, which is worth stating
@@ -192,6 +195,45 @@ this spawn's wave list, this goal's life cost. A prefab cannot vary per instance
 that is the day `genre-spinup`'s parked question is genuinely asked rather than
 dodged. Two dodges in a row is a good record and not a proof. _[earned 2026-08-13]_
 
+### T8: Combat is one system, and the things it makes exist for one run only
+
+`shoot` is towers firing, arrows flying, wounds landing and monsters dying — one
+system, not three, because a shot is one story with an order inside it: arrows in
+the air land *before* towers loose new ones, so a kill frees every tower to retarget
+the same step and an arrow always spends at least one step visibly flying. Order
+between systems is list order (`index.ts`, `march` before `shoot` so arrows fly at
+where a monster is); order inside a story belongs to the file that tells it.
+
+**An arrow is an entity made mid-run, and it carries only a sprite.** Its target,
+damage and speed are true of one run only, so they live in a WeakMap keyed on the
+arrow (T6 applied to something that did not exist at Play) — which is also the
+answer to "which entities are arrows", because membership in that map *is* being
+one. The renderer needs nothing new: it syncs by id, so pushing an entity into the
+list is the whole of making it visible, and splicing it out is the whole of a death.
+Spawned ids are `arrow#<n>` off a module counter — authored ids are hex, so the
+namespaces cannot collide.
+
+Targeting is code's choice, not the player's (the spec cuts per-tower targeting
+rules): farthest along the road in range, because that is the monster closest to
+costing a life. A level with no road falls back to nearest-to-tower, so combat
+still works on a broken or roadless level rather than silently not. _[earned
+2026-08-14]_
+
+### T9: Art for what a run spawns is declared in authored content, under a field named `texture`
+
+A spawned entity can only wear a texture that was loaded with the level — nothing
+can fetch mid-run. The kernel loads every reference sitting under a field called
+`texture`, at any depth, in any component, including ones it has no schema for
+(`textureRefsOf`, text-formats). So the archer post's prefab declares its arrow's
+art *inside the tower component* — `"projectile": { "texture": … }` — and the
+spawned arrow wears that same reference.
+
+**This is why the tower component carries an asset reference rather than a
+filename**, and the rule to carry forward for waves: whatever a system will spawn,
+the authored content that causes the spawning names the art, under the one agreed
+word. Nothing in this game tells the kernel what a tower or a wave is; the field
+name is the entire contract. _[earned 2026-08-14]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -263,14 +305,20 @@ _[earned 2026-08-13]_
   runs nothing that is not in it; there is no per-level system list and no fallback.
 - `src/systems/march.ts` — `march`, the `speed` component, and where a run's
   bookkeeping lives (T6).
+- `src/systems/shoot.ts` — combat whole: the `tower` and `health` components,
+  arrows, wounds, cooldowns, targeting and death (T8, T9).
 - `src/systems/route.ts` — what a drawn road *is*: the `grid`, `tile`, `spawn` and
-  `goal` components, how the order is derived from them, and every way a level can
-  fail to describe a road.
+  `goal` components, how the order is derived from them, every way a level can
+  fail to describe a road — and the once-per-run road cache (`routeThrough`),
+  moved here the day a second system needed the same road.
 - `tests/levels.ts` — levels to test against, built as entity lists rather than as
   files. A system is handed entities and nothing else, so a fixture that went through
   JSON would be testing the kernel's loader on the way past.
 - `prefabs/monster-runner.json`, `prefabs/monster-brute.json` — the monster types,
-  and therefore the speeds (T5).
+  and therefore the speeds *and healths* (T5 — both halves of the spec's
+  "speed-and-health combination" now live there).
+- `prefabs/tower-archer.json` — the first tower: its numbers, and the arrow's art
+  and speed inside its `tower` component (T8, T9).
 - `prefabs/road-tile.json`, `prefabs/road-spawn.json`, `prefabs/road-goal.json` —
   the three kinds of road tile, and therefore the two ends (T7). All three carry
   `tile: { kind: "path" }`; the two ends add an empty `spawn` or `goal`.

@@ -47,9 +47,49 @@ export function road(cells: readonly (readonly [number, number])[]): Entity[] {
   })
 }
 
-/** One monster, standing where it was put. */
-export function monster(at: { x: number; y: number }, unitsPerSecond: number): Entity {
-  return entity('Runner', at.x, at.y, { speed: { unitsPerSecond } })
+/**
+ * One monster, standing where it was put. Hits are how much shooting it
+ * survives; the name doubles as the id, so a level with two monsters names them
+ * apart.
+ */
+export function monster(
+  at: { x: number; y: number },
+  unitsPerSecond: number,
+  hits?: number,
+  name = 'Runner',
+): Entity {
+  return entity(name, at.x, at.y, {
+    speed: { unitsPerSecond },
+    ...(hits === undefined ? {} : { health: { total: hits } }),
+  })
+}
+
+/**
+ * One tower, as the archer-post prefab authors one — every number overridable
+ * so a test says only the number it is about.
+ */
+export function archer(
+  at: { x: number; y: number },
+  overrides: Partial<{
+    rangeUnits: number
+    damage: number
+    shotsPerSecond: number
+    projectileSpeed: number
+    name: string
+  }> = {},
+): Entity {
+  return entity(overrides.name ?? 'Archer post', at.x, at.y, {
+    sprite: { texture: { id: 'archer-texture', path: 'assets/textures/towers/archer.png' } },
+    tower: {
+      rangeUnits: overrides.rangeUnits ?? 48,
+      damage: overrides.damage ?? 1,
+      shotsPerSecond: overrides.shotsPerSecond ?? 1,
+      projectile: {
+        texture: { id: 'arrow-texture', path: 'assets/textures/projectiles/arrow.png' },
+        unitsPerSecond: overrides.projectileSpeed ?? 160,
+      },
+    },
+  })
 }
 
 /**

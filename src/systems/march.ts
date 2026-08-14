@@ -1,6 +1,6 @@
 import type { Entity, System } from 'kernel-2d/runtime'
 
-import { distanceAlongNearest, pointAlong, routeIn, type Route } from './route'
+import { distanceAlongNearest, pointAlong, routeThrough } from './route'
 
 /**
  * Monsters walking the road, from the spawn to the goal, each at its own rate.
@@ -33,7 +33,7 @@ export const marchSystem: System = {
   id: 'march',
 
   step: (entities, dtSeconds) => {
-    const route = roadIn(entities)
+    const route = routeThrough(entities)
     if (route === null) return
 
     for (const entity of entities) {
@@ -74,27 +74,6 @@ export const marchSystem: System = {
  * back at the start with nothing to reset.
  */
 const travelled = new WeakMap<Entity, number>()
-
-/**
- * The road, worked out once per run rather than once per step.
- *
- * **The spec is what makes this safe:** *"[the path] does not change, ever, during
- * play or otherwise."* The tiles a road is made of cannot move while a level is
- * running, so deriving it sixty times a second would be arriving at the same answer
- * repeatedly. Keyed on the entity list, which the engine makes once when a level
- * starts and holds for as long as it runs — so a level that is stopped and played
- * again derives its road again, and an edit made in between is picked up.
- */
-const roads = new WeakMap<readonly Entity[], Route | null>()
-
-function roadIn(entities: readonly Entity[]): Route | null {
-  const known = roads.get(entities)
-  if (known !== undefined) return known
-
-  const found = routeIn(entities)
-  roads.set(entities, found)
-  return found
-}
 
 /** The rate this entity walks at, or null if it does not walk. */
 function speedOf(entity: Entity): number | null {

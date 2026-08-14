@@ -1,6 +1,7 @@
 import type { System } from 'kernel-2d/runtime'
 
 import { marchSystem } from './march'
+import { shootSystem } from './shoot'
 
 /**
  * Every system this game runs, in the order it runs them.
@@ -18,5 +19,9 @@ import { marchSystem } from './march'
  * The kernel's own `spinSystem` is deliberately *not* here. It is scaffolding that
  * belongs to the sample project, and this game has no noun that justifies anything
  * turning.
+ *
+ * `march` before `shoot`, and the order is load-bearing: monsters take their
+ * step first, so every arrow this step flies at where a monster *is*, not where
+ * it stood a step ago.
  */
-export const systems: readonly System[] = [marchSystem]
+export const systems: readonly System[] = [marchSystem, shootSystem]
