@@ -1,5 +1,6 @@
 import type { System } from 'kernel-2d/runtime'
 
+import { buildSystem } from './build'
 import { leakSystem } from './leak'
 import { marchSystem } from './march'
 import { shootSystem } from './shoot'
@@ -28,16 +29,19 @@ import { waveSystem } from './waves'
  * on. `waves` next, and its place is load-bearing twice over: it must
  * confiscate the drawn queue before `march`'s first step can move a waiting
  * monster, and a wave called this step must be in the level before `march`
- * walks and `shoot` aims. Then `march` before `shoot`: monsters take their
- * step first, so every arrow this step flies at where a monster *is*, not
- * where it stood a step ago. `leak` after both — an arrival costs a life only
- * once movement and combat have had their say — and `verdict` last, judging
- * the step's final state: a run is won the step its last monster dies, not a
- * step later.
+ * walks and `shoot` aims. `build` before `march` and `shoot`, so a tower
+ * bought this step stands — and fires — the same step, even in a paused game
+ * (`build` is deliberately deaf to the tempo). Then `march` before `shoot`:
+ * monsters take their step first, so every arrow this step flies at where a
+ * monster *is*, not where it stood a step ago. `leak` after both — an arrival
+ * costs a life only once movement and combat have had their say — and
+ * `verdict` last, judging the step's final state: a run is won the step its
+ * last monster dies, not a step later.
  */
 export const systems: readonly System[] = [
   tempoSystem,
   waveSystem,
+  buildSystem,
   marchSystem,
   shootSystem,
   leakSystem,

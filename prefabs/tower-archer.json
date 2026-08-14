@@ -10,6 +10,9 @@
         "path": "assets/textures/towers/archer.png"
       }
     },
+    "price": {
+      "gold": 30
+    },
     "tower": {
       "rangeUnits": 48,
       "damage": 1,

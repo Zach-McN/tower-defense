@@ -7,8 +7,8 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **the game can be paused and fast-forwarded — P and F while
-playing** (2026-08-14).
+Last true as of: **towers are bought during play — click a buildable pad, and the
+coins on the map pay for it** (2026-08-14).
 
 ---
 
@@ -63,6 +63,14 @@ mid-map, everything freezes where it stands, and P again resumes. Press **F** to
 at triple speed — chevrons appear, and F again returns to normal. Pause wins if both
 are on. You can call a wave while paused; it stands ready at the spawn until time
 moves again, which is a fine way to take a breath and look at the board.
+
+**Click a grey pad to buy a tower there.** The flagstone pads are the buildable
+tiles, and clicking a vacant one builds a copy of the tower this level offers —
+an archer post, 30 gold — paid with the coins lying on the map. Not enough coins
+and the click simply does nothing; too many and the change is dropped at the new
+tower's foot. Building works while paused, and that is the intended rhythm: pause,
+look, spend, unpause. What you cannot do is build on the grass — no pad, no tower —
+or twice on one pad.
 
 The level ends one of two ways, and says so in the middle of the map:
 
@@ -267,6 +275,25 @@ mid-level.
 
 ---
 
+## Laying out the build spots and the purse
+
+**Where the player may build is level design, and you draw it.** Click
+**`prefabs/tile-buildable.json`** and place flagstone pads on the grass — beside
+bends for value, beside straights for coverage. The pads are the whole of the
+building rules: no pad, no tower, and one tower per pad. Level 1 has six.
+
+**The starting purse is coins you place.** Click **`prefabs/coin.json`** and put
+down ten-gold coins somewhere tidy — level 1 stacks three in the top-left corner,
+thirty gold, exactly one archer post. Everything the player can spend is visible on
+the map before they spend it: the purse you placed, plus the bounties their kills
+drop.
+
+**A level offers the towers it shows.** Building copies a tower already standing in
+the level, so the two archer posts you place are both defense and catalogue. A
+level with no tower placed offers nothing to build — pads or not.
+
+---
+
 ## Placing a tower
 
 1. Click **`prefabs/tower-archer.json`** in the Assets panel.
@@ -298,9 +325,10 @@ Range is in units — 48 is three tiles. The `projectile` part next to those num
 says what an arrow looks like and how fast it flies; swap its texture to re-fletch
 every arrow this kind of tower shoots.
 
-**During play you are a spectator.** Placing a tower is editing the level, and it
-happens before Play is pressed — buying towers mid-level with gold is coming, but it
-is not here yet.
+**Placing here is authoring; buying happens in play.** A tower placed in the editor
+is part of the level — pre-built defense the player starts with, and the catalogue
+of what they may buy. The towers the *player* adds are bought with clicks on pads
+during play, cost gold, and vanish with Stop like everything else a run does.
 
 ---
 
@@ -324,13 +352,14 @@ is the checklist:
 
 ## What this game cannot do yet
 
-- **Spend gold.** Coins drop and lie there; nothing buys, upgrades or sells a
-  tower yet. Building during play — the real game loop, where the coins on the
-  ground are your budget — is the next big piece, and it needs the mouse to
-  reach the game the way the spacebar now does.
+- **Choose what to build.** One kind of tower is for sale, so a click means an
+  archer post. The mage spire and the slow tower are next, and picking between
+  them will come with them.
+- **Upgrade or sell a tower.** Tiers and refunds are designed but not built.
 - **A Call Wave button on screen.** The spacebar is the button, P and F are the
-  speed controls. Nothing on the screen lists the keys, counts the waves, or
-  shows how many are left — the glyphs that appear mid-map are the only report.
+  speed controls, a click is the trowel. Nothing on the screen lists the keys,
+  counts the waves, or shows how many are left — the glyphs that appear mid-map
+  are the only report.
 - **Build a tower during play.** Towers are placed in the editor before Play is
   pressed. Buying them mid-level with gold is the game's real loop and it is not
   here yet.

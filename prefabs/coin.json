@@ -1,0 +1,19 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "74b01ef7fc62dfc0",
+  "name": "Gold coin",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "a754b8d220f0ac58",
+        "path": "assets/textures/tokens/coin.png"
+      }
+    },
+    "coin": {
+      "gold": 10
+    }
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}

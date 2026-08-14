@@ -218,7 +218,7 @@ function targetFor(post: Entity, rangeUnits: number, entities: readonly Entity[]
   return best
 }
 
-interface Tower {
+export interface Tower {
   rangeUnits: number
   damage: number
   shotsPerSecond: number
@@ -267,8 +267,9 @@ let fletched = 0
  * All of it is checked before any of it is used (game-code T3): a tower with a
  * range and no projectile is not half a tower, it is a component somebody
  * mangled by hand, and the safe reading of that is "this does not shoot".
+ * Exported for `build.ts`, whose whole trade is in things that satisfy this.
  */
-function towerOf(entity: Entity): Tower | null {
+export function towerOf(entity: Entity): Tower | null {
   const component: unknown = entity.components['tower']
   if (typeof component !== 'object' || component === null) return null
 

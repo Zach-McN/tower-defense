@@ -75,11 +75,13 @@ export function archer(
     damage: number
     shotsPerSecond: number
     projectileSpeed: number
+    price: number
     name: string
   }> = {},
 ): Entity {
   return entity(overrides.name ?? 'Archer post', at.x, at.y, {
     sprite: { texture: { id: 'archer-texture', path: 'assets/textures/towers/archer.png' } },
+    price: { gold: overrides.price ?? 30 },
     tower: {
       rangeUnits: overrides.rangeUnits ?? 48,
       damage: overrides.damage ?? 1,
@@ -95,6 +97,19 @@ export function archer(
 /** One heart. How many stand is how many lives the level has. */
 export function life(at: { x: number; y: number }, name = 'Life'): Entity {
   return entity(name, at.x, at.y, { life: {} })
+}
+
+/** One buildable pad — the spec's third tile kind, where a tower may go. */
+export function pad(at: { x: number; y: number }, name = 'Pad'): Entity {
+  return entity(name, at.x, at.y, { tile: { kind: 'buildable' } })
+}
+
+/** One coin on the ground, as a kill drops it. */
+export function coin(at: { x: number; y: number }, gold: number, name = 'Coin'): Entity {
+  return entity(name, at.x, at.y, {
+    sprite: { texture: { id: 'coin-texture', path: 'assets/textures/tokens/coin.png' } },
+    coin: { gold },
+  })
 }
 
 /**

@@ -516,6 +516,54 @@
       }
     },
     {
+      "id": "4f2a8c1e6b9d3750",
+      "name": "Pad 1",
+      "transform": { "x": 56, "y": 56, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+      }
+    },
+    {
+      "id": "6d4b2f9a8c1e5073",
+      "name": "Pad 2",
+      "transform": { "x": 104, "y": 24, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+      }
+    },
+    {
+      "id": "8f6d4a2c1b3e7095",
+      "name": "Pad 3",
+      "transform": { "x": 120, "y": 88, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+      }
+    },
+    {
+      "id": "a18f6c4e2d5b9037",
+      "name": "Pad 4",
+      "transform": { "x": 184, "y": 120, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+      }
+    },
+    {
+      "id": "c3a18e6f4b7d2059",
+      "name": "Pad 5",
+      "transform": { "x": 232, "y": 152, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+      }
+    },
+    {
+      "id": "e5c3a08f6d1b4279",
+      "name": "Pad 6",
+      "transform": { "x": 264, "y": 120, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "173838f7aaff14d3", "path": "prefabs/tile-buildable.json" } }
+      }
+    },
+    {
       "id": "b52e9d04a7c31f18",
       "name": "Archer post",
       "transform": {
@@ -665,6 +713,30 @@
             "path": "prefabs/monster-runner.json"
           }
         }
+      }
+    },
+    {
+      "id": "0d7f3b9e5a2c8164",
+      "name": "Purse 1",
+      "transform": { "x": 24, "y": 168, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "74b01ef7fc62dfc0", "path": "prefabs/coin.json" } }
+      }
+    },
+    {
+      "id": "2f9d5b1a7c4e8360",
+      "name": "Purse 2",
+      "transform": { "x": 40, "y": 168, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "74b01ef7fc62dfc0", "path": "prefabs/coin.json" } }
+      }
+    },
+    {
+      "id": "4b1f7d3c9e5a2086",
+      "name": "Purse 3",
+      "transform": { "x": 56, "y": 168, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "74b01ef7fc62dfc0", "path": "prefabs/coin.json" } }
       }
     },
     {

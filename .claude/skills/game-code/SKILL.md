@@ -35,6 +35,8 @@ The vocabulary now, all of it justified by a noun in `docs/GENRE-SPEC.md`:
 "components": { "verdict": { "won": true } }       // run-only, on the banner
 "components": { "outcome": { "victory": { "texture": { … } }, "defeat": { "texture": { … } } } }
 "components": { "tempo": { "paused": { "texture": { … } }, "fast": { "texture": { … } } } }
+"components": { "tile": { "kind": "buildable" } }
+"components": { "price": { "gold": 30 } }
 ```
 
 `spawn` and `goal` are components with nothing in them, which is worth stating
@@ -322,6 +324,35 @@ system that forgets runs at 1× inside a paused game — visible the first time
 `tempoOf` answers 1 for a run it never saw, so driving one system alone in a
 test still means what it always meant. _[earned 2026-08-14]_
 
+### T13: A level offers what it shows — building copies a standing tower, and the purse is placed coins
+
+Build-during-play (`build.ts`) closed the spec's loop with three decisions,
+each the placement pattern again:
+
+1. **Buildable is the spec's third tile kind, drawn** —
+   `prefabs/tile-buildable.json`, `tile: { kind: "buildable" }`. Where the
+   player may build is level design; a click during play (`clickedIn`, the
+   kernel's pointer in scene units — this system is the consumer that seam was
+   shaped by) on a vacant pad builds, anywhere else is nobody's. One tower per
+   pad, by a vacancy check with the same half-tile arithmetic as a leak.
+2. **What gets built is a copy of a tower already standing in the level**
+   (`copyEntity` on the first entity carrying valid `tower` + `price`). The
+   prefab stays the single source of what a tower is, nothing reads a file
+   mid-run, and a level's catalogue is its pre-placed towers — both defense
+   and shop. The rejected alternative was the buildable tile carrying a full
+   tower description: a second answer to "what is an archer post" that drifts
+   the day Zach tunes one (T4's failure, resisted again). Price sits on the
+   tower prefab (`price: { gold: 30 }`), beside the stats it prices.
+3. **The starting purse is coins the author places** —
+   `prefabs/coin.json`, ten gold each — because the first playtest proved a
+   bounty-only economy pays out at the exact moment there is nothing left to
+   buy. Payment removes coins largest-first and drops one change coin at the
+   new tower's foot, so the board's arithmetic always balances in public.
+
+Building deliberately ignores the tempo — pausing to spend calmly is the
+spec's no-time-pressure build phase working — and refuses on a decided level,
+same as waves. _[earned 2026-08-14]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -401,6 +432,8 @@ _[earned 2026-08-13]_
 - `src/systems/tempo.ts` — the speed controls: the `tempo` component's glyph
   art, the toggle keys, and `tempoOf`, the number every time-spending system
   multiplies by (T12).
+- `src/systems/build.ts` — buying: the `buildable` tile kind, the `price` and
+  `coin` components' spending half, and the offered-by-presence rule (T13).
 - `src/systems/leak.ts` — the `life` component, what counts as arriving, and
   which heart a leak takes (T11).
 - `src/systems/verdict.ts` — the `outcome` and `verdict` components, what each

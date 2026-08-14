@@ -1,0 +1,19 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "173838f7aaff14d3",
+  "name": "Buildable pad",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "9f136a73751c658a",
+        "path": "assets/textures/tiles/buildable.png"
+      }
+    },
+    "tile": {
+      "kind": "buildable"
+    }
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}
