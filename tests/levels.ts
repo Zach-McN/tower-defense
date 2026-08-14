@@ -99,6 +99,39 @@ export function life(at: { x: number; y: number }, name = 'Life'): Entity {
   return entity(name, at.x, at.y, { life: {} })
 }
 
+/** A splash tower, as the mage-spire prefab authors one. */
+export function mage(
+  at: { x: number; y: number },
+  overrides: Partial<{ splashUnits: number; price: number; name: string }> = {},
+): Entity {
+  return entity(overrides.name ?? 'Mage spire', at.x, at.y, {
+    sprite: { texture: { id: 'mage-texture', path: 'assets/textures/towers/mage.png' } },
+    price: { gold: overrides.price ?? 45 },
+    tower: {
+      rangeUnits: 44,
+      damage: 1,
+      shotsPerSecond: 0.7,
+      projectile: {
+        texture: { id: 'bolt-texture', path: 'assets/textures/projectiles/bolt.png' },
+        unitsPerSecond: 120,
+        splashUnits: overrides.splashUnits ?? 20,
+      },
+    },
+  })
+}
+
+/** A slow-aura totem, as the frost-totem prefab authors one. */
+export function frost(
+  at: { x: number; y: number },
+  overrides: Partial<{ rangeUnits: number; factor: number; price: number; name: string }> = {},
+): Entity {
+  return entity(overrides.name ?? 'Frost totem', at.x, at.y, {
+    sprite: { texture: { id: 'frost-texture', path: 'assets/textures/towers/frost.png' } },
+    price: { gold: overrides.price ?? 25 },
+    slow: { rangeUnits: overrides.rangeUnits ?? 36, factor: overrides.factor ?? 0.5 },
+  })
+}
+
 /** One buildable pad — the spec's third tile kind, where a tower may go. */
 export function pad(at: { x: number; y: number }, name = 'Pad'): Entity {
   return entity(name, at.x, at.y, { tile: { kind: 'buildable' } })

@@ -13,6 +13,14 @@
     "grid": {
       "tileSize": 16
     },
+    "wares": {
+      "chosen": {
+        "texture": {
+          "id": "5f96eb1b5c50e8f5",
+          "path": "assets/textures/tokens/chosen.png"
+        }
+      }
+    },
     "tempo": {
       "paused": {
         "texture": {

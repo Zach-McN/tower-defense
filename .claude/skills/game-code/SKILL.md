@@ -37,6 +37,8 @@ The vocabulary now, all of it justified by a noun in `docs/GENRE-SPEC.md`:
 "components": { "tempo": { "paused": { "texture": { … } }, "fast": { "texture": { … } } } }
 "components": { "tile": { "kind": "buildable" } }
 "components": { "price": { "gold": 30 } }
+"components": { "slow": { "rangeUnits": 36, "factor": 0.5 } }
+"components": { "wares": { "chosen": { "texture": { … } } } }
 ```
 
 `spawn` and `goal` are components with nothing in them, which is worth stating
@@ -353,6 +355,34 @@ Building deliberately ignores the tempo — pausing to spend calmly is the
 spec's no-time-pressure build phase working — and refuses on a decided level,
 same as waves. _[earned 2026-08-14]_
 
+### T14: A role is where the behaviour lives, not a new machine — splash is a field, slow is an aura, and the shop is number keys
+
+The spec's committed roles landed as amendments, not systems (T2's rule
+holding at scale):
+
+- **Splash is one optional field**, `projectile.splashUnits` on the `tower`
+  component: a landing strikes every live monster within that radius of the
+  target, and a plain arrow is the one-monster case of the same sentence.
+  Each splash kill drops its own coin. Present-but-mangled refuses the whole
+  tower, absent means plain (T3's "whole or not at all" with an optional).
+- **Slow is its own component** (`slow: { rangeUnits, factor }`), because the
+  spec's slow role is an *aura* — "drags down the speed of everything in
+  range" — not a projectile, so it is read by `march` (which owns what moving
+  means) and never by `shoot`. The frost totem is a priced building with no
+  `tower` component at all: it cannot shoot by construction. Auras do not
+  stack; the strongest single one wins.
+- **Choosing a ware is `build.ts`'s third input**: `Digit1..9` pick from the
+  catalogue — the *distinct kinds* on show, told apart by prefab reference
+  (which bought copies inherit, so building never grows the catalogue) in
+  order of first appearance. The choice is shown as a golden arrow over one
+  standing example (`wares` art on the Ground, the fourth board-centre glyph
+  family). "Building" generalised from `tower` to `tower`-or-`slow` in the
+  occupancy and catalogue checks the day the totem arrived.
+
+A catalogue exemplar can be parked off the map edge — the display row beside
+the wave queue — because offered-by-presence (T13) never asked where the
+example stands, only that it does. _[earned 2026-08-14]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -448,8 +478,13 @@ _[earned 2026-08-13]_
 - `prefabs/monster-runner.json`, `prefabs/monster-brute.json` — the monster types,
   and therefore the speeds *and healths* (T5 — both halves of the spec's
   "speed-and-health combination" now live there).
-- `prefabs/tower-archer.json` — the first tower: its numbers, and the arrow's art
-  and speed inside its `tower` component (T8, T9).
+- `prefabs/tower-archer.json`, `prefabs/tower-mage.json`,
+  `prefabs/tower-frost.json` — the three buildable kinds: single-target,
+  splash, and slow, each carrying its `price` (T8, T9, T13, T14).
+- `prefabs/coin.json` — the placeable ten-gold coin: how a level draws its
+  starting purse (T13).
+- `prefabs/tile-buildable.json` — the third tile kind, where building happens
+  (T13).
 - `prefabs/wave-break.json` — the banner that splits the drawn queue into waves
   (T10).
 - `prefabs/life.json` — a heart: one life, counted by placement (T11).

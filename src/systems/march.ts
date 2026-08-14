@@ -54,7 +54,7 @@ export const marchSystem: System = {
       // road walks on from halfway rather than jumping back to the spawn, and one
       // placed behind the spawn starts below zero with that far still to come.
       const from = travelled.get(entity) ?? distanceAlongNearest(route, entity.transform)
-      const to = Math.min(route.length, from + speed * dtSeconds * pace)
+      const to = Math.min(route.length, from + speed * dtSeconds * pace * chillOn(entity, entities))
       travelled.set(entity, to)
 
       if (to < 0) {
@@ -96,6 +96,53 @@ export const marchSystem: System = {
  * back at the start with nothing to reset.
  */
 const travelled = new WeakMap<Entity, number>()
+
+/**
+ * How much the frost slows this walker: the strongest single aura it stands
+ * in, or 1 in the open.
+ *
+ * The slow role is the spec's — *"drags down the speed of everything in
+ * range"* — and it is an aura, not a projectile, so it lives here with the
+ * walking rather than in `shoot`: a slow tower changes what moving *means*
+ * near it, and the system that moves things is the one that must know. Two
+ * totems do not stack: the strongest wins, because "half of a half of a half"
+ * is a corridor nothing ever leaves and the spec's tight monster budget cuts
+ * both ways.
+ */
+function chillOn(walker: Entity, entities: readonly Entity[]): number {
+  let chill = 1
+
+  for (const entity of entities) {
+    const slow = slowOf(entity)
+    if (slow === null) continue
+
+    const dx = walker.transform.x - entity.transform.x
+    const dy = walker.transform.y - entity.transform.y
+    if (dx * dx + dy * dy > slow.rangeUnits * slow.rangeUnits) continue
+    if (slow.factor < chill) chill = slow.factor
+  }
+
+  return chill
+}
+
+export interface Slow {
+  rangeUnits: number
+  factor: number
+}
+
+/**
+ * The slow-aura component, whole or not at all (game-code T3). Exported for
+ * `build.ts`, to whom a frost totem is a building like any tower.
+ */
+export function slowOf(entity: Entity): Slow | null {
+  const component: unknown = entity.components['slow']
+  if (typeof component !== 'object' || component === null) return null
+
+  const { rangeUnits, factor } = component as Record<string, unknown>
+  if (typeof rangeUnits !== 'number' || !Number.isFinite(rangeUnits) || rangeUnits <= 0) return null
+  if (typeof factor !== 'number' || !Number.isFinite(factor) || factor <= 0 || factor > 1) return null
+  return { rangeUnits, factor }
+}
 
 /** The rate this entity walks at, or null if it does not walk. */
 function speedOf(entity: Entity): number | null {

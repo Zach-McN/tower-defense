@@ -1,0 +1,23 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "ddad785541b8c4eb",
+  "name": "Frost totem",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "f7da50f6648d2755",
+        "path": "assets/textures/towers/frost.png"
+      }
+    },
+    "price": {
+      "gold": 25
+    },
+    "slow": {
+      "rangeUnits": 36,
+      "factor": 0.5
+    }
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}

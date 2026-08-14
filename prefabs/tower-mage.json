@@ -1,0 +1,32 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "2e1ca31313247666",
+  "name": "Mage spire",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "ea73033191a0c78b",
+        "path": "assets/textures/towers/mage.png"
+      }
+    },
+    "price": {
+      "gold": 45
+    },
+    "tower": {
+      "rangeUnits": 44,
+      "damage": 1,
+      "shotsPerSecond": 0.7,
+      "projectile": {
+        "texture": {
+          "id": "9c02bbc65ae682c1",
+          "path": "assets/textures/projectiles/bolt.png"
+        },
+        "unitsPerSecond": 120,
+        "splashUnits": 20
+      }
+    }
+  },
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
+}

@@ -7,8 +7,8 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **towers are bought during play — click a buildable pad, and the
-coins on the map pay for it** (2026-08-14).
+Last true as of: **three kinds of tower — archer, mage, frost — and the number keys
+choose which one a click buys** (2026-08-14).
 
 ---
 
@@ -65,12 +65,21 @@ are on. You can call a wave while paused; it stands ready at the spawn until tim
 moves again, which is a fine way to take a breath and look at the board.
 
 **Click a grey pad to buy a tower there.** The flagstone pads are the buildable
-tiles, and clicking a vacant one builds a copy of the tower this level offers —
-an archer post, 30 gold — paid with the coins lying on the map. Not enough coins
-and the click simply does nothing; too many and the change is dropped at the new
-tower's foot. Building works while paused, and that is the intended rhythm: pause,
-look, spend, unpause. What you cannot do is build on the grass — no pad, no tower —
-or twice on one pad.
+tiles, and clicking a vacant one builds whatever the golden arrow points at, paid
+with the coins lying on the map. Not enough coins and the click simply does
+nothing; too many and the change is dropped at the new tower's foot. Building works
+while paused, and that is the intended rhythm: pause, look, spend, unpause. What
+you cannot do is build on the grass — no pad, no tower — or twice on one pad.
+
+**The number keys choose what to buy.** A little golden arrow hangs over one
+standing example of the chosen kind — press **1**, **2**, **3** to move it between
+the kinds this level shows, in the order they appear. Level 1 sells three:
+
+| Key | Tower | Price | What it does |
+|---|---|---|---|
+| 1 | Archer post | 30 | Steady single-target arrows. The backbone. |
+| 2 | Mage spire | 45 | Slower bolts that hit everything packed around the target. |
+| 3 | Frost totem | 25 | No shots at all — everything walking near it moves at half speed. |
 
 The level ends one of two ways, and says so in the middle of the map:
 
@@ -289,8 +298,11 @@ the map before they spend it: the purse you placed, plus the bounties their kill
 drop.
 
 **A level offers the towers it shows.** Building copies a tower already standing in
-the level, so the two archer posts you place are both defense and catalogue. A
-level with no tower placed offers nothing to build — pads or not.
+the level, so what you place is both defense and catalogue. A tower you want to
+*sell* without pre-building can stand off the map edge, like level 1's mage spire
+and frost totem parked beside the monster queue — the display row is far enough
+from the road that it never joins the fight. A level with no tower placed offers
+nothing to build — pads or not.
 
 ---
 
@@ -352,10 +364,9 @@ is the checklist:
 
 ## What this game cannot do yet
 
-- **Choose what to build.** One kind of tower is for sale, so a click means an
-  archer post. The mage spire and the slow tower are next, and picking between
-  them will come with them.
 - **Upgrade or sell a tower.** Tiers and refunds are designed but not built.
+- **The long-range role.** Three of the four committed tower roles exist;
+  the far-seeing cheap-hitting one does not yet.
 - **A Call Wave button on screen.** The spacebar is the button, P and F are the
   speed controls, a click is the trowel. Nothing on the screen lists the keys,
   counts the waves, or shows how many are left — the glyphs that appear mid-map

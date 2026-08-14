@@ -68,6 +68,8 @@ interface Flight {
   target: Entity
   damage: number
   unitsPerSecond: number
+  /** Hits everything this close to where it lands, when the tower is the splash kind. */
+  splashUnits: number | null
 }
 
 /**
@@ -106,16 +108,19 @@ function land(entities: Entity[], dtSeconds: number): void {
     const step = flight.unitsPerSecond * dtSeconds
 
     if (gap <= step) {
-      wounds.set(flight.target, woundsOf(flight.target) + flight.damage)
       fallen.push(arrow)
-      if (isDead(flight.target)) {
-        fallen.push(flight.target)
-        // "Monsters that die drop gold" — literally. The coin lies where the
-        // monster fell, carrying the bounty its type authored, and spending
-        // it is somebody else's business on a later day. A monster with no
-        // well-formed bounty drops nothing (game-code T3).
-        const coin = coinFor(flight.target)
-        if (coin !== null) dropped.push(coin)
+      // The splash role: one landing, everything near the target struck. A
+      // plain arrow is the one-monster case of the same sentence.
+      for (const struck of struckBy(flight, entities)) {
+        wounds.set(struck, woundsOf(struck) + flight.damage)
+        if (isDead(struck)) {
+          fallen.push(struck)
+          // "Monsters that die drop gold" — literally. The coin lies where
+          // the monster fell, carrying the bounty its type authored. A
+          // monster with no well-formed bounty drops nothing (game-code T3).
+          const coin = coinFor(struck)
+          if (coin !== null) dropped.push(coin)
+        }
       }
       continue
     }
@@ -129,6 +134,24 @@ function land(entities: Entity[], dtSeconds: number): void {
 
   remove(entities, fallen)
   entities.push(...dropped)
+}
+
+/**
+ * Who a landing hits: the target alone for a plain arrow, every live monster
+ * within the splash of where the target stands for the splash kind. The
+ * target's own spot is the centre — the bolt was flying at *it*.
+ */
+function struckBy(flight: Flight, entities: readonly Entity[]): Entity[] {
+  if (flight.splashUnits === null) return [flight.target]
+
+  const centre = flight.target.transform
+  const radius = flight.splashUnits
+  return entities.filter((entity) => {
+    if (healthOf(entity) === null || isDead(entity)) return false
+    const dx = entity.transform.x - centre.x
+    const dy = entity.transform.y - centre.y
+    return dx * dx + dy * dy <= radius * radius
+  })
 }
 
 /**
@@ -222,7 +245,12 @@ export interface Tower {
   rangeUnits: number
   damage: number
   shotsPerSecond: number
-  projectile: { texture: { id: string; path: string }; unitsPerSecond: number }
+  projectile: {
+    texture: { id: string; path: string }
+    unitsPerSecond: number
+    /** The splash role: damage lands on everything this close to the target. */
+    splashUnits?: number
+  }
 }
 
 /** One arrow, at the tower, already aimed. Its flight is registered here too. */
@@ -252,6 +280,7 @@ function looseAt(post: Entity, tower: Tower, target: Entity): Entity {
     target,
     damage: tower.damage,
     unitsPerSecond: tower.projectile.unitsPerSecond,
+    splashUnits: tower.projectile.splashUnits ?? null,
   })
 
   return arrow
@@ -277,8 +306,11 @@ export function towerOf(entity: Entity): Tower | null {
   if (!isRate(rangeUnits) || !isRate(damage) || !isRate(shotsPerSecond)) return null
   if (typeof projectile !== 'object' || projectile === null) return null
 
-  const { texture, unitsPerSecond } = projectile as Record<string, unknown>
+  const { texture, unitsPerSecond, splashUnits } = projectile as Record<string, unknown>
   if (!isRate(unitsPerSecond)) return null
+  // Absent means a plain arrow; present-but-mangled refuses the whole tower,
+  // like every other field here.
+  if (splashUnits !== undefined && !isRate(splashUnits)) return null
   if (typeof texture !== 'object' || texture === null) return null
 
   const { id, path } = texture as Record<string, unknown>
@@ -288,7 +320,11 @@ export function towerOf(entity: Entity): Tower | null {
     rangeUnits,
     damage,
     shotsPerSecond,
-    projectile: { texture: { id, path }, unitsPerSecond },
+    projectile: {
+      texture: { id, path },
+      unitsPerSecond,
+      ...(splashUnits === undefined ? {} : { splashUnits }),
+    },
   }
 }
 
