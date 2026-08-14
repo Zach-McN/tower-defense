@@ -531,6 +531,9 @@
             "id": "2243481b472f8a04",
             "path": "prefabs/monster-runner.json"
           }
+        },
+        "spin": {
+          "degreesPerSecond": 30
         }
       }
     }
