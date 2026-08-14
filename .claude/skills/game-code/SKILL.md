@@ -34,6 +34,7 @@ The vocabulary now, all of it justified by a noun in `docs/GENRE-SPEC.md`:
 "components": { "coin": { "gold": 5 } }            // run-only, on dropped coins
 "components": { "verdict": { "won": true } }       // run-only, on the banner
 "components": { "outcome": { "victory": { "texture": { … } }, "defeat": { "texture": { … } } } }
+"components": { "tempo": { "paused": { "texture": { … } }, "fast": { "texture": { … } } } }
 ```
 
 `spawn` and `goal` are components with nothing in them, which is worth stating
@@ -298,6 +299,29 @@ Two authored-content rules fell out and both are load-bearing:
 Order in `index.ts` is now five long and each adjacency is argued there:
 waves, march, shoot, leak, verdict. _[earned 2026-08-14]_
 
+### T12: Time is scaled by the systems that spend it, and the kernel's clock never hears about it
+
+The speed controls (`P` pause, `F` fast-forward at 3×, pause winning while both
+are toggled) live in `tempo.ts`: a per-run toggle state (T6), a glyph entity at
+the board's centre wearing art the Ground prefab names under `tempo` (T9), and
+one exported number — `tempoOf(entities)`: 0, 1 or 3. Every system that
+consumes time multiplies its own `dtSeconds` by it; the kernel's fixed step is
+untouched and every system still runs sixty times a second.
+
+**Why game-side:** extraction over anticipation — the kernel is asked for a
+rate control the day a second game wants one — and because *a paused game is
+not a paused program*: presses still land while paused, so a wave can be
+called and stand frozen at the spawn, which is this genre's look-at-the-board
+moment and would be unreachable if the loop itself had stopped.
+
+**The rule that keeps it honest:** any `dtSeconds * x` in this game has
+`tempoOf` beside it, and `march`/`shoot` early-return at 0 so a paused tower
+with a ready cooldown does not fire into a world that is standing still. A
+system that forgets runs at 1× inside a paused game — visible the first time
+`P` is pressed, which is the right way for that mistake to fail.
+`tempoOf` answers 1 for a run it never saw, so driving one system alone in a
+test still means what it always meant. _[earned 2026-08-14]_
+
 ## Gotchas
 
 ### TG1: A level that does not describe a road is completely silent
@@ -374,6 +398,9 @@ _[earned 2026-08-13]_
 - `src/systems/waves.ts` — the drawn queue: the `waveBreak` component, what is
   confiscated and when, the spacebar as Call Wave, and `wavesWaiting`, the one
   window into the confiscated queue (T10).
+- `src/systems/tempo.ts` — the speed controls: the `tempo` component's glyph
+  art, the toggle keys, and `tempoOf`, the number every time-spending system
+  multiplies by (T12).
 - `src/systems/leak.ts` — the `life` component, what counts as arriving, and
   which heart a leak takes (T11).
 - `src/systems/verdict.ts` — the `outcome` and `verdict` components, what each
@@ -393,8 +420,9 @@ _[earned 2026-08-13]_
 - `prefabs/wave-break.json` — the banner that splits the drawn queue into waves
   (T10).
 - `prefabs/life.json` — a heart: one life, counted by placement (T11).
-- `prefabs/ground.json` — the backdrop, the grid (TG3), and now the `outcome`
-  art the verdict banner wears (T11).
+- `prefabs/ground.json` — the backdrop, the grid (TG3), and the board-centre
+  glyph art: `outcome` for the verdict banner (T11), `tempo` for the pause and
+  fast-forward signs (T12).
 - `prefabs/road-tile.json`, `prefabs/road-spawn.json`, `prefabs/road-goal.json` —
   the three kinds of road tile, and therefore the two ends (T7). All three carry
   `tile: { kind: "path" }`; the two ends add an empty `spawn` or `goal`.

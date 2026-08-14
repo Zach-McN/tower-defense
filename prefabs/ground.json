@@ -13,6 +13,20 @@
     "grid": {
       "tileSize": 16
     },
+    "tempo": {
+      "paused": {
+        "texture": {
+          "id": "015ca0cb811dbc06",
+          "path": "assets/textures/tokens/pause.png"
+        }
+      },
+      "fast": {
+        "texture": {
+          "id": "91397861442077e0",
+          "path": "assets/textures/tokens/fast.png"
+        }
+      }
+    },
     "outcome": {
       "victory": {
         "texture": {

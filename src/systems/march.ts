@@ -1,6 +1,7 @@
 import type { Entity, System } from 'kernel-2d/runtime'
 
 import { distanceAlongNearest, pointAlong, routeThrough } from './route'
+import { tempoOf } from './tempo'
 
 /**
  * Monsters walking the road, from the spawn to the goal, each at its own rate.
@@ -36,6 +37,10 @@ export const marchSystem: System = {
     const route = routeThrough(entities)
     if (route === null) return
 
+    // The player's speed controls, applied where time is spent (tempo.ts).
+    const pace = tempoOf(entities)
+    if (pace === 0) return
+
     for (const entity of entities) {
       const speed = speedOf(entity)
       // Null covers both "this thing does not walk" and "somebody typed something
@@ -49,7 +54,7 @@ export const marchSystem: System = {
       // road walks on from halfway rather than jumping back to the spawn, and one
       // placed behind the spawn starts below zero with that far still to come.
       const from = travelled.get(entity) ?? distanceAlongNearest(route, entity.transform)
-      const to = Math.min(route.length, from + speed * dtSeconds)
+      const to = Math.min(route.length, from + speed * dtSeconds * pace)
       travelled.set(entity, to)
 
       if (to < 0) {

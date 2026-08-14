@@ -3,6 +3,7 @@ import type { System } from 'kernel-2d/runtime'
 import { leakSystem } from './leak'
 import { marchSystem } from './march'
 import { shootSystem } from './shoot'
+import { tempoSystem } from './tempo'
 import { verdictSystem } from './verdict'
 import { waveSystem } from './waves'
 
@@ -23,7 +24,8 @@ import { waveSystem } from './waves'
  * belongs to the sample project, and this game has no noun that justifies anything
  * turning.
  *
- * `waves` first, and its place in the line is load-bearing twice over: it must
+ * `tempo` before everything, so a press of P freezes the very step it lands
+ * on. `waves` next, and its place is load-bearing twice over: it must
  * confiscate the drawn queue before `march`'s first step can move a waiting
  * monster, and a wave called this step must be in the level before `march`
  * walks and `shoot` aims. Then `march` before `shoot`: monsters take their
@@ -33,4 +35,11 @@ import { waveSystem } from './waves'
  * the step's final state: a run is won the step its last monster dies, not a
  * step later.
  */
-export const systems: readonly System[] = [waveSystem, marchSystem, shootSystem, leakSystem, verdictSystem]
+export const systems: readonly System[] = [
+  tempoSystem,
+  waveSystem,
+  marchSystem,
+  shootSystem,
+  leakSystem,
+  verdictSystem,
+]

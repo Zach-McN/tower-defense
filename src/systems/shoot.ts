@@ -1,6 +1,7 @@
 import type { Entity, System } from 'kernel-2d/runtime'
 
 import { distanceAlongNearest, routeThrough } from './route'
+import { tempoOf } from './tempo'
 
 /**
  * Towers shooting the monsters that walk past — the whole of combat.
@@ -49,8 +50,14 @@ export const shootSystem: System = {
   id: 'shoot',
 
   step: (entities, dtSeconds) => {
-    land(entities, dtSeconds)
-    fire(entities, dtSeconds)
+    // The player's speed controls, applied where time is spent (tempo.ts).
+    // Paused combat is combat that does not happen: arrows hang, cooldowns
+    // hold, and no tower looses at a world that is standing still.
+    const pace = tempoOf(entities)
+    if (pace === 0) return
+
+    land(entities, dtSeconds * pace)
+    fire(entities, dtSeconds * pace)
   },
 }
 

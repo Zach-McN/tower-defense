@@ -7,8 +7,8 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **levels are won and lost — hearts are lives, monsters drop coins,
-and a trophy or a skull says how it ended** (2026-08-14).
+Last true as of: **the game can be paused and fast-forwarded — P and F while
+playing** (2026-08-14).
 
 ---
 
@@ -57,6 +57,12 @@ ready for the next wave — including straight away, if you want them overlappin
 **A monster that reaches the goal takes a heart with it.** It disappears into the
 goal, and the row of hearts by the goal is one shorter. The hearts are the lives:
 what you see is the whole count.
+
+**You control the speed of time.** Press **P** to pause — pause bars appear
+mid-map, everything freezes where it stands, and P again resumes. Press **F** to run
+at triple speed — chevrons appear, and F again returns to normal. Pause wins if both
+are on. You can call a wave while paused; it stands ready at the spawn until time
+moves again, which is a fine way to take a breath and look at the board.
 
 The level ends one of two ways, and says so in the middle of the map:
 
@@ -322,11 +328,9 @@ is the checklist:
   tower yet. Building during play — the real game loop, where the coins on the
   ground are your budget — is the next big piece, and it needs the mouse to
   reach the game the way the spacebar now does.
-- **A Call Wave button on screen.** The spacebar is the button. Nothing on the
-  screen says so, counts the waves, or shows how many are left — the picture is
-  the only report.
-- **Speed controls.** No pause, no fast-forward. The design calls them
-  load-bearing, and they are not here yet.
+- **A Call Wave button on screen.** The spacebar is the button, P and F are the
+  speed controls. Nothing on the screen lists the keys, counts the waves, or
+  shows how many are left — the glyphs that appear mid-map are the only report.
 - **Build a tower during play.** Towers are placed in the editor before Play is
   pressed. Buying them mid-level with gold is the game's real loop and it is not
   here yet.
