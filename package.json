@@ -1,0 +1,14 @@
+{
+  "name": "tower-defense",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A fantasy tower defense. The game as text, plus the game's own code; the editor that opens it is kernel-2d.",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "4.1.10"
+  }
+}

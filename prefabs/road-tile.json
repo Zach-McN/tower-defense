@@ -1,0 +1,19 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "4389a08e112124dd",
+  "name": "Road",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "57f1f75beb884318",
+        "path": "assets/textures/tiles/path.png"
+      }
+    },
+    "tile": {
+      "kind": "path"
+    }
+  },
+  "generatedBy": "claude-opus-5",
+  "generatedAt": "2026-08-13"
+}

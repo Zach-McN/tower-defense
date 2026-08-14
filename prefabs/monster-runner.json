@@ -1,0 +1,19 @@
+{
+  "format": "kernel2d.prefab",
+  "version": 1,
+  "id": "2243481b472f8a04",
+  "name": "Runner",
+  "components": {
+    "sprite": {
+      "texture": {
+        "id": "5345492f14c2e76d",
+        "path": "assets/textures/monsters/runner.png"
+      }
+    },
+    "speed": {
+      "unitsPerSecond": 56
+    }
+  },
+  "generatedBy": "claude-opus-5",
+  "generatedAt": "2026-08-13"
+}

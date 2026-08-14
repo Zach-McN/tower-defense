@@ -18,5 +18,5 @@
       "kernel-2d/runtime": ["../../kernel-2d/runtime/index.ts"]
     }
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "tests/**/*.ts"]
 }
