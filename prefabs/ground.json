@@ -74,7 +74,23 @@
       "6": { "texture": { "id": "0b537c5fbfb919d4", "path": "assets/textures/tokens/digit-6.png" } },
       "7": { "texture": { "id": "f839becd412590ee", "path": "assets/textures/tokens/digit-7.png" } },
       "8": { "texture": { "id": "4248eb58a857aa38", "path": "assets/textures/tokens/digit-8.png" } },
-      "9": { "texture": { "id": "b228b76e0463c742", "path": "assets/textures/tokens/digit-9.png" } }
+      "9": { "texture": { "id": "b228b76e0463c742", "path": "assets/textures/tokens/digit-9.png" } },
+      "dot": { "texture": { "id": "7548f0e4a092f42a", "path": "assets/textures/tokens/digit-dot.png" } }
+    },
+    "waves": {
+      "flag": {
+        "texture": {
+          "id": "86f5793eb9cc7627",
+          "path": "assets/textures/markers/wave-break.png"
+        }
+      }
+    },
+    "stats": {
+      "damage": { "texture": { "id": "f8676efde32912a0", "path": "assets/textures/tokens/stat-damage.png" } },
+      "range": { "texture": { "id": "aaf8a53469ab1d07", "path": "assets/textures/tokens/stat-range.png" } },
+      "rate": { "texture": { "id": "3d99d732022b15ba", "path": "assets/textures/tokens/stat-rate.png" } },
+      "splash": { "texture": { "id": "b59cefe5e2866417", "path": "assets/textures/tokens/stat-splash.png" } },
+      "chill": { "texture": { "id": "53f4d3751fe7e747", "path": "assets/textures/tokens/stat-chill.png" } }
     },
     "tempo": {
       "paused": {

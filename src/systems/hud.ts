@@ -2,9 +2,11 @@ import type { Entity, System } from 'kernel-2d/runtime'
 
 import { chosenOf, occupied } from './build'
 import { slowOf } from './march'
+import { routeThrough } from './route'
 import { towerOf } from './shoot'
 import { tempoOf } from './tempo'
-import { isWare, nextRungOf, priceOf } from './trade'
+import { isWare, nextRungOf, priceOf, type Rung } from './trade'
+import { wavesWaiting } from './waves'
 
 /**
  * The planning overlay: pause is when the player looks at the board, so pause
@@ -20,12 +22,20 @@ import { isWare, nextRungOf, priceOf } from './trade'
  *     pad showing what the *chosen ware* would cover from there. Rings are
  *     one texture scaled: art the Ground prefab names under `range.ring` and
  *     `range.pale`, sized so the drawn radius is the range in scene units.
- *   - **What would the next rung cost?** Gold digits above every owned tower
- *     that has one left to buy — the price the next click would pay — and
- *     above the chosen ware, its build price. Digits are ten tiny textures
- *     the Ground names under `digits`, composed side by side, because a
- *     price is a number and numbers are made of digits (the same
+ *   - **What would the next rung cost, and what does it buy?** Gold digits
+ *     above every owned tower that has one left to buy — the price the next
+ *     click would pay — and under the price, what the rung raises: a stat
+ *     icon and the new number for each raise (`stats` art on the Ground —
+ *     sword for damage, circle for range, bolt for rate, burst for splash,
+ *     snowflake for the chill). Above the chosen ware, its build price.
+ *     Digits are ten tiny textures the Ground names under `digits` (plus a
+ *     `dot`, so a rate of 0.75 reads as one), composed side by side,
+ *     because a price is a number and numbers are made of digits (the same
  *     picture-is-the-data reading as everything else on this board).
+ *   - **How many waves are still coming?** The wave-break flag beside the
+ *     spawn mouth with the count of waves not yet called — read from the
+ *     confiscated queue (`wavesWaiting`), which is the one place the answer
+ *     exists once the drawn queue has been taken off the board.
  *   - **What are the keys?** The legend panel (`help.legend` art) over the
  *     lower board, listing every control this game answers to. It appears
  *     with the pause and leaves with it — an unpaused board stays clean.
@@ -84,6 +94,20 @@ function overlayFor(entities: readonly Entity[]): Entity[] {
     const rung = nextRungOf(post)
     if (rung !== null) {
       laid.push(...priceTag(entities, `hud#price#${post.id}`, rung.price, post.transform.x, post.transform.y + 19))
+      laid.push(...raiseTag(entities, `hud#raise#${post.id}`, rung, post.transform.x, post.transform.y + 27))
+    }
+  }
+
+  // How many waves are still to be called, said beside the spawn mouth with
+  // the same flag the queue was drawn with. Nothing to say once it is zero —
+  // or before `waves` has taken the queue, which list order guarantees.
+  const waiting = wavesWaiting(entities)
+  const spawn = routeThrough(entities)?.points[0]
+  if (waiting !== null && waiting > 0 && spawn !== undefined) {
+    const flag = artOf(entities, 'waves', 'flag')
+    if (flag !== null) {
+      laid.push(sprite('hud#waves#flag', 'Waves left', spawn.x, spawn.y + 22, flag, 1))
+      laid.push(...numberTag(entities, 'hud#waves#count', String(waiting), spawn.x + 13, spawn.y + 22))
     }
   }
 
@@ -122,14 +146,79 @@ function overlayFor(entities: readonly Entity[]): Entity[] {
 
 /** A price as gold digits, centred on `x`. A missing digit texture drops the tag. */
 function priceTag(entities: readonly Entity[], id: string, price: number, x: number, y: number): Entity[] {
-  const chars = [...String(Math.floor(price))]
-  const digits: Entity[] = []
-  for (const [index, char] of chars.entries()) {
-    const art = artOf(entities, 'digits', char)
+  return numberTag(entities, id, String(Math.floor(price)), x, y)
+}
+
+/** How wide each glyph advances: the dot is narrower than a digit. */
+const DIGIT_ADVANCE = 5
+const DOT_ADVANCE = 3
+
+/**
+ * A number as gold glyphs, centred on `x` — digits and, for the rates a rung
+ * can raise, the decimal dot (`digits.dot` art). A missing glyph drops the
+ * whole tag: half a number is worse than none.
+ */
+function numberTag(entities: readonly Entity[], id: string, text: string, x: number, y: number): Entity[] {
+  const advances = [...text].map((char) => (char === '.' ? DOT_ADVANCE : DIGIT_ADVANCE))
+  const width = advances.reduce((sum, advance) => sum + advance, 0)
+
+  const glyphs: Entity[] = []
+  let at = x - width / 2
+  for (const [index, char] of [...text].entries()) {
+    const art = artOf(entities, 'digits', char === '.' ? 'dot' : char)
     if (art === null) return []
-    digits.push(sprite(`${id}#${String(index)}`, 'Price', x + (index - (chars.length - 1) / 2) * 5, y, art, 1))
+    const advance = advances[index] ?? DIGIT_ADVANCE
+    glyphs.push(sprite(`${id}#${String(index)}`, 'Number', at + advance / 2, y, art, 1))
+    at += advance
   }
-  return digits
+  return glyphs
+}
+
+/** Which stat icon says what a raised field means, in the order raises are shown. */
+const RAISES: readonly { icon: string; of: (rung: Rung) => number | undefined }[] = [
+  { icon: 'damage', of: (rung) => rung.tower?.damage },
+  { icon: 'range', of: (rung) => rung.tower?.rangeUnits ?? rung.slow?.rangeUnits },
+  { icon: 'rate', of: (rung) => rung.tower?.shotsPerSecond },
+  { icon: 'splash', of: (rung) => rung.tower?.projectile?.splashUnits },
+  { icon: 'chill', of: (rung) => rung.slow?.factor },
+]
+
+/** How wide a stat icon advances, and the gap between two raises. */
+const ICON_ADVANCE = 8
+const PAIR_GAP = 4
+
+/**
+ * What the next rung buys, as icon-and-new-number pairs centred on `x`: the
+ * numbers are the rung's own — the same ones the prefab authors — so the
+ * board and the file never disagree about what gold gets. A raise whose icon
+ * or digits are missing from the level's art is left out rather than half
+ * drawn.
+ */
+function raiseTag(entities: readonly Entity[], id: string, rung: Rung, x: number, y: number): Entity[] {
+  const pairs = RAISES.map((raise) => ({ icon: raise.icon, value: raise.of(rung) }))
+    .filter((pair): pair is { icon: string; value: number } => pair.value !== undefined)
+    .map((pair) => ({ ...pair, text: String(pair.value) }))
+  if (pairs.length === 0) return []
+
+  const widthOf = (pair: { text: string }): number =>
+    ICON_ADVANCE + [...pair.text].reduce((sum, char) => sum + (char === '.' ? DOT_ADVANCE : DIGIT_ADVANCE), 0)
+  const width = pairs.reduce((sum, pair) => sum + widthOf(pair), 0) + (pairs.length - 1) * PAIR_GAP
+
+  const laid: Entity[] = []
+  let at = x - width / 2
+  for (const pair of pairs) {
+    const icon = artOf(entities, 'stats', pair.icon)
+    if (icon === null) continue
+    laid.push(sprite(`${id}#${pair.icon}`, 'Raise', at + ICON_ADVANCE / 2, y, icon, 1))
+    const digits = numberTag(entities, `${id}#${pair.icon}#value`, pair.text, at + ICON_ADVANCE + (widthOf(pair) - ICON_ADVANCE) / 2, y)
+    if (digits.length === 0) {
+      laid.pop()
+      continue
+    }
+    laid.push(...digits)
+    at += widthOf(pair) + PAIR_GAP
+  }
+  return laid
 }
 
 function sprite(

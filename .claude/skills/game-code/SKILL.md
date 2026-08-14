@@ -458,7 +458,18 @@ straight time that instinct lost (`genre-spinup`'s tally):
   radius (22px), so one PNG serves every range including upgraded ones.
 - A price is digits, and digits are ten tiny textures the Ground names under
   `digits` — composed side by side per price, because the art cannot know
-  the number in advance and the number cannot ship as text.
+  the number in advance and the number cannot ship as text. A `dot` texture
+  joined them the day rungs raised rates: 0.75 is a number too, and glyphs
+  advance by their own widths so it reads as one.
+- **What a rung buys is icon-and-new-number pairs** under its price (`stats`
+  art: sword, circle, bolt, burst, snowflake), the rung's own authored
+  values — so the board and the prefab never disagree about what gold gets.
+- **The wave counter is the confiscated queue said out loud**: the wave-break
+  flag (`waves.flag` art — the same texture the queue is drawn with) beside
+  the spawn with `wavesWaiting`'s count in digits. It exists because the
+  queue leaves the board at the first step (T10), taking the only picture of
+  "what is coming" with it; `hud` running after `waves` in list order is
+  what guarantees the count is never asked before the queue is taken.
 - The legend is one authored panel (`help.legend`), replaceable art like
   every glyph.
 - Rebuild-on-signature: the overlay is recomputed each step but respawned
@@ -597,7 +608,8 @@ _[earned 2026-08-13]_
   and the board's glyph art: `outcome` for the verdict banner (T11), `tempo`
   for the pause and fast-forward signs (T12), `wares` for the chosen arrow,
   the selling sign, the refund coin's face and the tier star (T14, T15), and
-  the planning overlay's `range`, `help` and `digits` bundles (T17).
+  the planning overlay's `range`, `help`, `digits`, `stats` and `waves`
+  bundles (T17).
 - `prefabs/road-tile.json`, `prefabs/road-spawn.json`, `prefabs/road-goal.json` —
   the three kinds of road tile, and therefore the two ends (T7). All three carry
   `tile: { kind: "path" }`; the two ends add an empty `spawn` or `goal`.

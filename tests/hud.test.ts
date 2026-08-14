@@ -6,7 +6,8 @@ import { buildSystem } from '../src/systems/build'
 import { hudSystem } from '../src/systems/hud'
 import { routeThrough } from '../src/systems/route'
 import { tempoSystem } from '../src/systems/tempo'
-import { archer, centre, coin, frost, grid, ground, pad, road, scenery, ware } from './levels'
+import { waveSystem } from '../src/systems/waves'
+import { archer, centre, coin, frost, grid, ground, monster, pad, road, scenery, ware } from './levels'
 
 /**
  * The paused planning overlay, and the scenery tile kind. Pause is when the
@@ -101,6 +102,102 @@ describe('the planning overlay', () => {
     buildSystem.step(entities, STEP)
     hudSystem.step(entities, STEP)
     expect(tag()).toBe('35')
+  })
+
+  it('the next rung says what it buys: an icon and the new number per raise', () => {
+    const clicks = inputEntity()
+    const post = archer(centre(2, 4))
+    post.components['tiers'] = [{ price: { gold: 35 }, tower: { damage: 3, rangeUnits: 56 } }]
+    const entities = [ground(), ...straightRoad(), clicks, post]
+
+    pause(entities, clicks)
+    hudSystem.step(entities, STEP)
+
+    const textureOf = (id: string): string | undefined =>
+      (entities.find((one) => one.id === id)?.components['sprite'] as { texture: { id: string } } | undefined)
+        ?.texture.id
+    expect(textureOf(`hud#raise#${post.id}#damage`)).toBe('stat-damage-texture')
+    expect(textureOf(`hud#raise#${post.id}#damage#value#0`)).toBe('digit-3-texture')
+    expect(textureOf(`hud#raise#${post.id}#range`)).toBe('stat-range-texture')
+    expect(textureOf(`hud#raise#${post.id}#range#value#0`)).toBe('digit-5-texture')
+    expect(textureOf(`hud#raise#${post.id}#range#value#1`)).toBe('digit-6-texture')
+  })
+
+  it('a rate raise reads as a decimal, dot and all', () => {
+    const clicks = inputEntity()
+    const post = archer(centre(2, 4))
+    post.components['tiers'] = [{ price: { gold: 40 }, tower: { shotsPerSecond: 0.75 } }]
+    const entities = [ground(), ...straightRoad(), clicks, post]
+
+    pause(entities, clicks)
+    hudSystem.step(entities, STEP)
+
+    const glyphs = entities
+      .filter((one) => one.id.startsWith(`hud#raise#${post.id}#rate#value`))
+      .map((one) => (one.components['sprite'] as { texture: { id: string } }).texture.id)
+    expect(glyphs).toEqual(['digit-0-texture', 'digit-dot-texture', 'digit-7-texture', 'digit-5-texture'])
+  })
+
+  it('the frost ladder chills in decimals too', () => {
+    const clicks = inputEntity()
+    const totem = frost(centre(2, 4))
+    totem.components['tiers'] = [{ price: { gold: 20 }, slow: { factor: 0.4 } }]
+    const entities = [ground(), ...straightRoad(), clicks, totem]
+
+    pause(entities, clicks)
+    hudSystem.step(entities, STEP)
+
+    expect(entities.some((one) => one.id === `hud#raise#${totem.id}#chill`)).toBe(true)
+    const glyphs = entities
+      .filter((one) => one.id.startsWith(`hud#raise#${totem.id}#chill#value`))
+      .map((one) => (one.components['sprite'] as { texture: { id: string } }).texture.id)
+    expect(glyphs).toEqual(['digit-0-texture', 'digit-dot-texture', 'digit-4-texture'])
+  })
+
+  it('counts the waves still waiting beside the spawn, and counts down', () => {
+    const clicks = inputEntity()
+    const entities = [
+      ground(),
+      ...straightRoad(),
+      clicks,
+      monster({ x: -10, y: centre(0, 2).y }, 56, 3, 'Queued 1'),
+      monster({ x: -40, y: centre(0, 2).y }, 56, 3, 'Queued 2'),
+    ]
+    // A break between them: two waves.
+    const split = monster({ x: -25, y: centre(0, 2).y }, 56, 3, 'Split')
+    delete split.components['speed']
+    delete split.components['health']
+    split.components['waveBreak'] = {}
+    entities.push(split)
+
+    waveSystem.step(entities, STEP)
+    pause(entities, clicks)
+    hudSystem.step(entities, STEP)
+
+    expect(entities.some((one) => one.id === 'hud#waves#flag')).toBe(true)
+    const count = (): string | undefined =>
+      (entities.find((one) => one.id === 'hud#waves#count#0')?.components['sprite'] as
+        | { texture: { id: string } }
+        | undefined)?.texture.id
+    expect(count()).toBe('digit-2-texture')
+
+    // Call one wave (paused calls are allowed); the counter follows.
+    clicks.components['input'] = { pressed: ['Space'], clicked: [] }
+    waveSystem.step(entities, STEP)
+    clicks.components['input'] = { pressed: [], clicked: [] }
+    hudSystem.step(entities, STEP)
+    expect(count()).toBe('digit-1-texture')
+  })
+
+  it('an empty queue hangs no flag', () => {
+    const clicks = inputEntity()
+    const entities = [ground(), ...straightRoad(), clicks]
+
+    waveSystem.step(entities, STEP)
+    pause(entities, clicks)
+    hudSystem.step(entities, STEP)
+
+    expect(entities.some((one) => one.id.startsWith('hud#waves'))).toBe(false)
   })
 
   it('the keys legend appears with the pause and only then', () => {

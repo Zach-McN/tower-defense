@@ -191,10 +191,22 @@ export function ground(tileSize: number = TILE): Entity {
   backdrop.components['help'] = {
     legend: { texture: { id: 'legend-texture', path: 'assets/textures/tokens/legend.png' } },
   }
-  backdrop.components['digits'] = Object.fromEntries(
-    [...Array(10).keys()].map((digit) => [
-      String(digit),
-      { texture: { id: `digit-${String(digit)}-texture`, path: `assets/textures/tokens/digit-${String(digit)}.png` } },
+  backdrop.components['digits'] = {
+    ...Object.fromEntries(
+      [...Array(10).keys()].map((digit) => [
+        String(digit),
+        { texture: { id: `digit-${String(digit)}-texture`, path: `assets/textures/tokens/digit-${String(digit)}.png` } },
+      ]),
+    ),
+    dot: { texture: { id: 'digit-dot-texture', path: 'assets/textures/tokens/digit-dot.png' } },
+  }
+  backdrop.components['waves'] = {
+    flag: { texture: { id: 'flag-texture', path: 'assets/textures/markers/wave-break.png' } },
+  }
+  backdrop.components['stats'] = Object.fromEntries(
+    ['damage', 'range', 'rate', 'splash', 'chill'].map((stat) => [
+      stat,
+      { texture: { id: `stat-${stat}-texture`, path: `assets/textures/tokens/stat-${stat}.png` } },
     ]),
   )
   return backdrop

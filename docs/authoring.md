@@ -7,8 +7,8 @@ Inspector cannot show you.
 
 If this page and the game disagree, the game is right and this page is a bug.
 
-Last true as of: **scenery, and the paused planning view — range rings, prices,
-and the keys on screen** (2026-08-14).
+Last true as of: **the paused planning view says everything — rings, prices,
+what a tier buys, waves left, and the keys** (2026-08-14).
 
 ---
 
@@ -74,10 +74,13 @@ moves again, which is a fine way to take a breath and look at the board.
 itself: a gold ring around every tower you own showing exactly what it covers
 (rings grow when you upgrade), a paler ring on every open pad showing what the
 *chosen* ware would cover from there, gold numbers over each tower saying what its
-next tier costs and over the chosen ware saying its price, and a panel listing
-every key the game answers to. Unpause and it all vanishes — the running board
-stays clean. Everything on the panel and every number is readable before you spend
-a coin, which is the point.
+next tier costs **and what it buys** — a stat icon with the new number for each
+raise: a sword for damage, a circle for range, a bolt for rate of fire, a burst
+for splash, a snowflake for the chill — the chosen ware's price over the shop
+row, the wave-break flag beside the spawn mouth counting the waves you have not
+yet called, and a panel listing every key the game answers to. Unpause and it all
+vanishes — the running board stays clean. Everything is readable before you spend
+a coin or press Space, which is the point.
 
 **Click a grey pad to buy a tower there.** The flagstone pads are the buildable
 tiles, and clicking a vacant one builds whatever the golden arrow points at, paid
@@ -430,11 +433,9 @@ is the checklist:
 
 ## What this game cannot do yet
 
-- **A wave counter.** The paused panel lists the keys, but nothing counts the
-  waves or shows how many are left — the queue you drew is the only picture of
-  what is coming, and it is off-screen once the level starts.
-- **See what a tier raises.** The paused view prices the next rung; what the gold
-  buys — more damage, more reach — is still only written in the prefab file.
+- **See which monsters a coming wave holds.** The paused view counts the waves
+  left; what is *in* them — how many brutes, how tightly packed — is only the
+  queue you drew, and that is off-screen once the level starts.
 - **Forget a completed level.** The checks on the level select persist in the
   browser; nothing in the editor clears them. (Clearing the browser's site data
   does.)
