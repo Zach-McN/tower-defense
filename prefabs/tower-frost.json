@@ -16,7 +16,11 @@
     "slow": {
       "rangeUnits": 36,
       "factor": 0.5
-    }
+    },
+    "tiers": [
+      { "price": { "gold": 20 }, "slow": { "factor": 0.4, "rangeUnits": 44 } },
+      { "price": { "gold": 35 }, "slow": { "factor": 0.3, "rangeUnits": 52 } }
+    ]
   },
   "generatedBy": "claude-fable-5",
   "generatedAt": "2026-08-14"

@@ -2,6 +2,7 @@ import type { Entity, System } from 'kernel-2d/runtime'
 
 import { distanceAlongNearest, pointAlong, routeThrough } from './route'
 import { tempoOf } from './tempo'
+import { isWare, slowAt } from './trade'
 
 /**
  * Monsters walking the road, from the spawn to the goal, each at its own rate.
@@ -113,6 +114,8 @@ function chillOn(walker: Entity, entities: readonly Entity[]): number {
   let chill = 1
 
   for (const entity of entities) {
+    // A ware's aura is a display piece's: the shop row chills nobody.
+    if (isWare(entity)) continue
     const slow = slowOf(entity)
     if (slow === null) continue
 
@@ -141,7 +144,9 @@ export function slowOf(entity: Entity): Slow | null {
   const { rangeUnits, factor } = component as Record<string, unknown>
   if (typeof rangeUnits !== 'number' || !Number.isFinite(rangeUnits) || rangeUnits <= 0) return null
   if (typeof factor !== 'number' || !Number.isFinite(factor) || factor <= 0 || factor > 1) return null
-  return { rangeUnits, factor }
+  // The authored base with every rung bought this run laid over it (trade.ts),
+  // exactly as `towerOf` answers for the shooting kinds.
+  return slowAt({ rangeUnits, factor }, entity)
 }
 
 /** The rate this entity walks at, or null if it does not walk. */

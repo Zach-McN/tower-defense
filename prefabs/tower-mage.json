@@ -25,7 +25,11 @@
         "unitsPerSecond": 120,
         "splashUnits": 20
       }
-    }
+    },
+    "tiers": [
+      { "price": { "gold": 30 }, "tower": { "damage": 2, "projectile": { "splashUnits": 24 } } },
+      { "price": { "gold": 50 }, "tower": { "damage": 3, "rangeUnits": 52 } }
+    ]
   },
   "generatedBy": "claude-fable-5",
   "generatedAt": "2026-08-14"

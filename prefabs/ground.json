@@ -19,6 +19,24 @@
           "id": "5f96eb1b5c50e8f5",
           "path": "assets/textures/tokens/chosen.png"
         }
+      },
+      "selling": {
+        "texture": {
+          "id": "da3a60c327936a90",
+          "path": "assets/textures/tokens/sell.png"
+        }
+      },
+      "coin": {
+        "texture": {
+          "id": "a754b8d220f0ac58",
+          "path": "assets/textures/tokens/coin.png"
+        }
+      },
+      "star": {
+        "texture": {
+          "id": "1a5bde145d7a1e0c",
+          "path": "assets/textures/tokens/star.png"
+        }
       }
     },
     "tempo": {
@@ -50,6 +68,6 @@
       }
     }
   },
-  "generatedBy": "claude-opus-5",
-  "generatedAt": "2026-08-13"
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
 }

@@ -2,6 +2,7 @@ import type { Entity, System } from 'kernel-2d/runtime'
 
 import { distanceAlongNearest, routeThrough } from './route'
 import { tempoOf } from './tempo'
+import { isWare, towerAt } from './trade'
 
 /**
  * Towers shooting the monsters that walk past — the whole of combat.
@@ -191,6 +192,8 @@ function fire(entities: Entity[], dtSeconds: number): void {
   const loosed: Entity[] = []
 
   for (const post of entities) {
+    // A ware is the shop row's display piece, not a defender: it never fires.
+    if (isWare(post)) continue
     const tower = towerOf(post)
     if (tower === null) continue
 
@@ -316,16 +319,21 @@ export function towerOf(entity: Entity): Tower | null {
   const { id, path } = texture as Record<string, unknown>
   if (typeof id !== 'string' || typeof path !== 'string') return null
 
-  return {
-    rangeUnits,
-    damage,
-    shotsPerSecond,
-    projectile: {
-      texture: { id, path },
-      unitsPerSecond,
-      ...(splashUnits === undefined ? {} : { splashUnits }),
+  // The authored base, with every rung bought this run laid over it — so
+  // everything that asks what a tower is gets what it is *now* (trade.ts).
+  return towerAt(
+    {
+      rangeUnits,
+      damage,
+      shotsPerSecond,
+      projectile: {
+        texture: { id, path },
+        unitsPerSecond,
+        ...(splashUnits === undefined ? {} : { splashUnits }),
+      },
     },
-  }
+    entity,
+  )
 }
 
 /** The hits this monster can take, or null if it is not a monster. */

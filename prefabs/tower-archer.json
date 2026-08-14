@@ -24,7 +24,11 @@
         },
         "unitsPerSecond": 160
       }
-    }
+    },
+    "tiers": [
+      { "price": { "gold": 20 }, "tower": { "damage": 2 } },
+      { "price": { "gold": 35 }, "tower": { "damage": 3, "rangeUnits": 56 } }
+    ]
   },
   "generatedBy": "claude-fable-5",
   "generatedAt": "2026-08-14"

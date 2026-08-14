@@ -716,11 +716,21 @@
       }
     },
     {
+      "id": "8e2f5a1c9d3b7046",
+      "name": "Archer ware",
+      "transform": { "x": 0, "y": 8, "rotation": 0, "scaleX": 1, "scaleY": 1 },
+      "components": {
+        "prefab": { "source": { "id": "2803339dcb617c4e", "path": "prefabs/tower-archer.json" } },
+        "ware": {}
+      }
+    },
+    {
       "id": "7a3e9c5b1f8d2046",
       "name": "Mage spire",
       "transform": { "x": -24, "y": 8, "rotation": 0, "scaleX": 1, "scaleY": 1 },
       "components": {
-        "prefab": { "source": { "id": "2e1ca31313247666", "path": "prefabs/tower-mage.json" } }
+        "prefab": { "source": { "id": "2e1ca31313247666", "path": "prefabs/tower-mage.json" } },
+        "ware": {}
       }
     },
     {
@@ -728,7 +738,8 @@
       "name": "Frost totem",
       "transform": { "x": -48, "y": 8, "rotation": 0, "scaleX": 1, "scaleY": 1 },
       "components": {
-        "prefab": { "source": { "id": "ddad785541b8c4eb", "path": "prefabs/tower-frost.json" } }
+        "prefab": { "source": { "id": "ddad785541b8c4eb", "path": "prefabs/tower-frost.json" } },
+        "ware": {}
       }
     },
     {
@@ -870,6 +881,6 @@
       }
     }
   ],
-  "generatedBy": "claude-opus-5",
-  "generatedAt": "2026-08-13"
+  "generatedBy": "claude-fable-5",
+  "generatedAt": "2026-08-14"
 }

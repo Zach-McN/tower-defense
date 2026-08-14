@@ -145,6 +145,28 @@ export function coin(at: { x: number; y: number }, gold: number, name = 'Coin'):
   })
 }
 
+/** Marks an entity as a shop-row display piece, the way a level's instance does. */
+export function ware(piece: Entity): Entity {
+  piece.components['ware'] = {}
+  return piece
+}
+
+/**
+ * The Ground with the full trade-art bundle, as the ground prefab authors it —
+ * for tests about the marker, the selling sign, refund coins or tier stars.
+ * Plain `grid()` stays the fixture for everything that only needs a tile size.
+ */
+export function ground(tileSize: number = TILE): Entity {
+  const backdrop = grid(tileSize)
+  backdrop.components['wares'] = {
+    chosen: { texture: { id: 'chosen-texture', path: 'assets/textures/tokens/chosen.png' } },
+    selling: { texture: { id: 'sell-texture', path: 'assets/textures/tokens/sell.png' } },
+    coin: { texture: { id: 'coin-texture', path: 'assets/textures/tokens/coin.png' } },
+    star: { texture: { id: 'star-texture', path: 'assets/textures/tokens/star.png' } },
+  }
+  return backdrop
+}
+
 /**
  * The same entities in a different order.
  *
