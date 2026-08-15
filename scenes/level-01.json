@@ -1071,6 +1071,25 @@
       }
     },
     {
+      "id": "6d8703a5cb267093",
+      "name": "Brute 2",
+      "transform": {
+        "x": 219,
+        "y": 87,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "components": {
+        "prefab": {
+          "source": {
+            "id": "6041c2b0db33ea43",
+            "path": "prefabs/monster-brute.json"
+          }
+        }
+      }
+    },
+    {
       "id": "3c4d5e6f7a8192a3",
       "name": "Rock 1",
       "transform": {
@@ -1161,25 +1180,6 @@
           "source": {
             "id": "74b01ef7fc62dfc0",
             "path": "prefabs/coin.json"
-          }
-        }
-      }
-    },
-    {
-      "id": "6d8703a5cb267093",
-      "name": "Brute 2",
-      "transform": {
-        "x": 219,
-        "y": 87,
-        "rotation": 0,
-        "scaleX": 1,
-        "scaleY": 1
-      },
-      "components": {
-        "prefab": {
-          "source": {
-            "id": "6041c2b0db33ea43",
-            "path": "prefabs/monster-brute.json"
           }
         }
       }
